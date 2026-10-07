@@ -1,0 +1,31 @@
+id,cluster,title,slug,page_type,intent,monetization,recommended_visual,wave
+1,Oscilloscopes,Best Oscilloscope for Beginners,best-oscilloscope-for-beginners,Buying Guide,Commercial,Affiliate,Beginner oscilloscope buying decision flowchart,Wave 1
+2,Oscilloscopes,Best Oscilloscope for Arduino and ESP32,best-oscilloscope-for-arduino-esp32,Buying Guide,Commercial,Affiliate,Arduino ESP32 debugging setup diagram,Wave 1
+3,Oscilloscopes,Best Oscilloscope Under $300,best-oscilloscope-under-300,Buying Guide,Commercial,Affiliate,Budget comparison matrix,Wave 1
+4,Oscilloscopes,Best Oscilloscope Under $500,best-oscilloscope-under-500,Buying Guide,Commercial,Affiliate,Under 500 feature comparison graphic,Wave 1
+5,Oscilloscopes,Best Portable Oscilloscope,best-portable-oscilloscope,Buying Guide,Commercial,Affiliate,Portable vs bench scope use case graphic,Wave 1
+6,Oscilloscopes,Best USB Oscilloscope,best-usb-oscilloscope,Buying Guide,Commercial,Affiliate,USB scope setup diagram,Wave 1
+7,Oscilloscopes,Rigol vs Siglent Oscilloscopes,rigol-vs-siglent-oscilloscopes,Comparison,Commercial,Affiliate,Brand comparison decision matrix,Wave 1
+8,Oscilloscopes,2 Channel vs 4 Channel Oscilloscope,2-channel-vs-4-channel-oscilloscope,Comparison,Commercial Investigation,Affiliate,2 channel vs 4 channel signal capture diagram,Wave 1
+9,Multimeters,Best Multimeter for Electronics,best-multimeter-for-electronics,Buying Guide,Commercial,Affiliate,Electronics multimeter feature checklist,Wave 2
+10,Multimeters,Best Multimeter for Beginners,best-multimeter-for-beginners,Buying Guide,Commercial,Affiliate,Beginner multimeter decision flowchart,Wave 2
+11,Multimeters,Best Multimeter Under $100,best-multimeter-under-100,Buying Guide,Commercial,Affiliate,Budget multimeter comparison matrix,Wave 2
+12,Multimeters,Best Bench Multimeter,best-bench-multimeter,Buying Guide,Commercial,Affiliate,Bench vs handheld multimeter graphic,Wave 2
+13,Multimeters,Fluke vs Klein Multimeters,fluke-vs-klein-multimeters,Comparison,Commercial,Affiliate,Brand comparison matrix,Wave 2
+14,Multimeters,Best Multimeter for Arduino and Low Voltage Electronics,best-multimeter-for-arduino-low-voltage-electronics,Buying Guide,Commercial,Affiliate,Low voltage measurement use case diagram,Wave 2
+15,Soldering and Rework,Best Soldering Station,best-soldering-station,Buying Guide,Commercial,Affiliate,Soldering station comparison matrix,Wave 3
+16,Soldering and Rework,Best Soldering Iron for Beginners,best-soldering-iron-for-beginners,Buying Guide,Commercial,Affiliate,Beginner iron selection flowchart,Wave 3
+17,Soldering and Rework,Best Soldering Station Under $100,best-soldering-station-under-100,Buying Guide,Commercial,Affiliate,Budget station comparison matrix,Wave 3
+18,Soldering and Rework,Best Hot Air Rework Station,best-hot-air-rework-station,Buying Guide,Commercial,Affiliate,Hot air rework setup diagram,Wave 3
+19,Soldering and Rework,Best Soldering Microscope,best-soldering-microscope,Buying Guide,Commercial,Affiliate,Microscope types comparison graphic,Wave 3
+20,Soldering and Rework,Hakko vs Weller Soldering Stations,hakko-vs-weller-soldering-stations,Comparison,Commercial,Affiliate,Brand comparison matrix,Wave 3
+21,Bench Power,Best Bench Power Supply for Electronics,best-bench-power-supply-for-electronics,Buying Guide,Commercial,Affiliate,Bench PSU feature comparison matrix,Wave 4
+22,Bench Power,Best Bench Power Supply for Beginners,best-bench-power-supply-for-beginners,Buying Guide,Commercial,Affiliate,Beginner PSU selection flowchart,Wave 4
+23,Bench Power,Best Bench Power Supply Under $200,best-bench-power-supply-under-200,Buying Guide,Commercial,Affiliate,Budget PSU comparison matrix,Wave 4
+24,Bench Power,Linear vs Switching Bench Power Supply,linear-vs-switching-bench-power-supply,Comparison,Commercial Investigation,Affiliate,Ripple and noise comparison diagram,Wave 4
+25,Logic Analyzers,Best Logic Analyzer,best-logic-analyzer,Buying Guide,Commercial,Affiliate,Logic analyzer comparison matrix,Wave 5
+26,Logic Analyzers,Best Logic Analyzer for Arduino and ESP32,best-logic-analyzer-for-arduino-esp32,Buying Guide,Commercial,Affiliate,Arduino ESP32 logic analyzer setup diagram,Wave 5
+27,Logic Analyzers,Best USB Logic Analyzer,best-usb-logic-analyzer,Buying Guide,Commercial,Affiliate,USB logic analyzer workflow diagram,Wave 5
+28,Workbench,Best Electronics Tool Kit,best-electronics-tool-kit,Buying Guide,Commercial,Affiliate,Electronics workbench essentials visual checklist,Wave 6
+29,Workbench,Best ESD Mat for Electronics,best-esd-mat-for-electronics,Buying Guide,Commercial,Affiliate,ESD safe workstation setup diagram,Wave 6
+30,Workbench,Best Helping Hands for Soldering,best-helping-hands-for-soldering,Buying Guide,Commercial,Affiliate,Helping hands styles comparison graphic,Wave 6
