@@ -2,7 +2,7 @@
 
 ## Mission
 
-Build a reusable operating system for a portfolio of SEO-driven WordPress sites. The system should reduce manual work while preserving editorial quality, SEO safety, monetization control, and human approval for high-value actions.
+Build a reusable operating system for a portfolio of SEO-driven WordPress sites. The system should reduce manual work while preserving editorial quality, SEO safety, monetization control, visual accuracy, and human approval for high-value actions.
 
 ## First site
 
@@ -31,6 +31,10 @@ Its commercial strategy centers on a Core 30 of high-intent landing pages suppor
 13. Research and writing must distinguish verified facts from assumptions.
 14. Commercial recommendations should optimize user fit first, revenue second.
 15. Do not create large numbers of thin programmatic pages.
+16. Visuals must improve comprehension or conversion, not exist only for decoration.
+17. Technical diagrams, wiring diagrams, charts, product comparison graphics, and infographics with factual claims must be grounded in approved research.
+18. Never generate a fake representation of a real product when exact product imagery is required.
+19. Safety-sensitive and technical visuals require QA before publication.
 
 ## Approval classes
 
@@ -44,6 +48,9 @@ Its commercial strategy centers on a Core 30 of high-intent landing pages suppor
 - deleting or noindexing indexed content
 - changes to monetization policy
 - automated publishing rules
+- safety-sensitive technical visuals
+- wiring diagrams and schematics
+- sponsored or branded factual graphics
 
 ### Eligible for future automated execution
 - keyword opportunity collection
@@ -52,6 +59,8 @@ Its commercial strategy centers on a Core 30 of high-intent landing pages suppor
 - internal-link suggestions
 - schema generation
 - metadata suggestions
+- visual brief generation
+- non-technical article imagery
 - refresh detection
 - performance reporting
 
@@ -61,13 +70,15 @@ Its commercial strategy centers on a Core 30 of high-intent landing pages suppor
 - Document public interfaces.
 - Prefer small modules.
 - Avoid site-specific logic in shared packages.
-- Keep WordPress, dashboard, database, and automation concerns separated.
+- Keep WordPress, dashboard, database, automation, and visual-generation concerns separated.
 - Make failures observable.
 - Use staging before production.
 
 ## Agent handoff flow
 
-SEO Opportunity -> Content Strategy -> Research -> Writer -> SEO QA -> Internal Linking -> Monetization -> Human Approval / Publish
+SEO Opportunity -> Content Strategy -> Research -> Writer -> Visual Content -> SEO QA -> Internal Linking -> Monetization -> Human Approval / Publish
+
+The Visual Content Agent may run in parallel with later editorial steps when its assets are based on an approved research pack.
 
 Refresh Agent runs on existing URLs based on performance changes.
 
