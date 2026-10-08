@@ -8,6 +8,7 @@
 - A read-only inventory normalizer that rejects off-domain URLs and canonical collisions.
 - A routing-policy loader that preserves empty model allowlists until a live registry has been evaluated and approved.
 - A deterministic mock OpenRouter provider. It cannot make paid requests or read `OPENROUTER_API_KEY`.
+- A server-only OpenRouter adapter that is disabled unless a caller explicitly enables paid requests and supplies an allowlisted model. Empty allowlists in the starter policy keep all live model requests blocked.
 - Pre-spend global, per-site, and per-content budget checks with telemetry records.
 - A sequential workflow state machine with audit history, required human approval gates, and explicit correction retries.
 
@@ -24,3 +25,7 @@ Run `npm test`. The tests are deterministic and do not require credentials, netw
 ## Design decisions
 
 `workflow-core` uses standard Node.js modules only so the early contract tests can run without a package install. The expected future runtime boundary is server-only: it can add a live adapter beside the mock provider, but the test path must remain mock-only and must never expose `OPENROUTER_API_KEY` to a browser or content prompt.
+
+## Execution routing
+
+Codex is used for repository work, tests, documentation, and interactive development under the owner's Codex subscription. It is not embedded as a background production model provider. OpenRouter is reserved for approved server-side runtime tasks after the model registry, fixed evaluation set, allowlist, budget, and privacy controls are complete. An OpenRouter key in local `.env` alone does not enable requests.

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
-  BudgetLedger, MockOpenRouterProvider, transition, retryFrom
+  BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -33,6 +33,39 @@ test('routing policy stays mocked until model allowlists are benchmarked', async
   assert.equal(route.live, false);
   assert.equal(result.output.title, 'Fixture title');
   assert.equal(result.telemetry.provider, 'mock');
+});
+
+test('live provider cannot make a request without an explicit opt-in and an allowlisted model', async () => {
+  assert.throws(() => new OpenRouterProvider({ apiKey: 'test-key' }), /allowPaidRequests/);
+  const requests = [];
+  const ledger = new BudgetLedger({ globalDailyCapUsd: 1, siteMonthlyCapUsd: 1, articleCapUsd: 1 });
+  const provider = new OpenRouterProvider({
+    apiKey: 'test-key',
+    allowPaidRequests: true,
+    fetchImpl: async (...args) => {
+      requests.push(args);
+      return { ok: true, json: async () => ({ model: 'approved-model', choices: [{ message: { content: 'fixture' } }], usage: { prompt_tokens: 2, completion_tokens: 1, cost: 0.01 } }) };
+    }
+  });
+  await assert.rejects(
+    provider.complete({ taskType: 'support_draft', model: 'not-approved', allowedModels: [], input: { messages: [] } }),
+    /not allowlisted/
+  );
+  assert.equal(requests.length, 0);
+  const result = await provider.complete({
+    taskType: 'support_draft', model: 'approved-model', allowedModels: ['approved-model'],
+    input: { messages: [{ role: 'user', content: 'fixture' }] }, budgetLedger: ledger,
+    siteId: 'circuits-at-home', contentId: 'support-1', estimatedCostUsd: 0.02
+  });
+  assert.equal(result.telemetry.provider, 'openrouter');
+  assert.equal(result.telemetry.estimated_cost_usd, 0.02);
+  assert.equal(requests.length, 1);
+  assert.doesNotMatch(requests[0][1].body, /test-key/);
+  await assert.rejects(
+    provider.complete({ taskType: 'support_draft', model: 'approved-model', allowedModels: ['approved-model'], input: { messages: [] } }),
+    /BudgetLedger/
+  );
+  assert.equal(requests.length, 1);
 });
 
 test('budget cap blocks further spend before it is recorded', () => {

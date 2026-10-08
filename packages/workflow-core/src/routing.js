@@ -46,3 +46,50 @@ export class MockOpenRouterProvider {
     return { output: structuredClone(fixture.output), usage: structuredClone(fixture.usage), telemetry: { task_type: taskType, model: route.model, provider: 'mock', input_bytes: JSON.stringify(input).length } };
   }
 }
+
+export class OpenRouterProvider {
+  constructor({ apiKey, fetchImpl = globalThis.fetch, allowPaidRequests = false }) {
+    if (!allowPaidRequests) throw new Error('Live OpenRouter requests require explicit allowPaidRequests=true');
+    if (!apiKey) throw new Error('OPENROUTER_API_KEY is required for the live provider');
+    if (typeof fetchImpl !== 'function') throw new Error('A fetch implementation is required for the live provider');
+    this.apiKey = apiKey;
+    this.fetchImpl = fetchImpl;
+  }
+
+  async complete({ taskType, input, model, allowedModels, maxOutputTokens = 800, budgetLedger, siteId, contentId, estimatedCostUsd }) {
+    if (!allowedModels.includes(model)) throw new Error(`Model is not allowlisted for ${taskType}`);
+    if (!(budgetLedger instanceof BudgetLedger)) throw new Error('A BudgetLedger is required for live provider requests');
+    const preflight = budgetLedger.canSpend({ siteId, contentId, estimatedUsd: estimatedCostUsd });
+    if (!preflight.allowed) throw new Error(`Budget blocked: ${preflight.reason}`);
+    const reservation = budgetLedger.record({ siteId, contentId, costUsd: estimatedCostUsd, taskType, model });
+    const response = await this.fetchImpl('https://openrouter.ai/api/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${this.apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        model,
+        messages: input.messages,
+        max_tokens: maxOutputTokens
+      })
+    });
+    if (!response.ok) throw new Error(`OpenRouter request failed with HTTP ${response.status}`);
+    const body = await response.json();
+    return {
+      output: body.choices?.[0]?.message?.content ?? '',
+      usage: {
+        input_tokens: body.usage?.prompt_tokens ?? 0,
+        output_tokens: body.usage?.completion_tokens ?? 0,
+        cost_usd: body.usage?.cost ?? 0
+      },
+      telemetry: {
+        task_type: taskType,
+        model: body.model ?? model,
+        provider: 'openrouter',
+        estimated_cost_usd: reservation.costUsd,
+        reported_cost_usd: body.usage?.cost ?? null
+      }
+    };
+  }
+}
