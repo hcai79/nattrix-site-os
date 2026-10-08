@@ -2,9 +2,10 @@
 
 ## Purpose
 
-The Google Sheet “TechvideoBlog Content Plan and Strategy” is the operational view for
-content inventory, QA state, and VA assignments. Durable research, audit findings, and
-engineering contracts remain in this repository.
+The Google Sheet “TechVideoBlog Operations Hub” is the operational view for content
+inventory, QA state, and VA assignments. It is separate from the historical planning
+workbook so routine work does not disturb source material. Durable research, audit
+findings, and engineering contracts remain in this repository.
 
 ## Tabs
 
@@ -12,8 +13,12 @@ engineering contracts remain in this repository.
 | --- | --- | --- |
 | Content Hub | Portfolio manager | Inventory of all published Pages and Posts, with role, QA status, next action, priority, task status, and assignee. |
 | VA Queue | Portfolio manager and VA | Bounded tasks with a required output, approval boundary, and safety note. |
-| Operations Guide | Everyone | The workflow, research standard, statuses, and non-negotiable production safeguards. |
-| Keywords, Links Proifle, Indexing pages, Link building 1 | Historical planning | Preserve as source material. Do not treat their legacy URLs, dates, titles, or estimates as current without verification. |
+| Dashboard | Everyone | Current counts, decision queue, and the immediate operating picture. |
+| Read Me | Everyone | The workflow, research standard, statuses, and non-negotiable production safeguards. |
+
+The legacy “TechvideoBlog Content Plan and Strategy” workbook remains historical source
+material. Do not treat its legacy URLs, dates, titles, or estimates as current without
+verification.
 
 ## Sync contract
 
