@@ -55,3 +55,7 @@ For each new site, provide or confirm:
 - weekly publishing ceiling and site time zone
 
 Never put a WordPress application password, hosting password, affiliate credential, or API key in Git, Sheets, or chat.
+
+## Recorded site audits
+
+- [TechVideoBlog read-only onboarding audit](../sites/techvideoblog/2026-10-08-read-only-onboarding-audit.md)
