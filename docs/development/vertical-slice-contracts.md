@@ -11,11 +11,12 @@
 - A server-only OpenRouter adapter that is disabled unless a caller explicitly enables paid requests and supplies an allowlisted model. Empty allowlists in the starter policy keep all live model requests blocked.
 - Pre-spend global, per-site, and per-content budget checks with telemetry records.
 - A sequential workflow state machine with audit history, required human approval gates, and explicit correction retries.
+- Workbook-row validation that rejects duplicate content IDs, duplicate slugs, unapproved core relations, malformed dates, and `NEW` URL collisions before any state is saved.
 
 ## Deliberately deferred
 
 - Registry retrieval, benchmark-driven model promotion, and the server-only live OpenRouter adapter.
-- Evidence persistence, workbook import/export, draft generation, media processing, dashboard UI, WordPress staging, scheduling, and production publishing.
+- Evidence persistence, workbook file import/export, draft generation, media processing, dashboard UI, WordPress staging, scheduling, and production publishing.
 - Any production site read or write.
 
 ## Local verification

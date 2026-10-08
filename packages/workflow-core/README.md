@@ -13,6 +13,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `OpenRouterProvider` is a server-only, explicitly enabled adapter. It enforces a supplied model allowlist and requires a `BudgetLedger` preflight before every request, but is not wired into the workflow until the registry and evaluation gate are complete.
 - `transition(job, nextState, options)` implements the documented workflow sequence and records approval gates.
 - `retryFrom(job, state, options)` creates an auditable, resumable correction transition without duplicate publishing behavior.
+- `validatePlanRows(rows, context)` validates editable workbook rows and produces a non-persisting collision and evidence preview.
 
 ## Security boundary
 

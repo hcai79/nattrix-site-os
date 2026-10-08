@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
-  BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom
+  BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -106,4 +106,30 @@ test('offline batch completes to scheduled without live provider calls or duplic
   assert.equal(job.state, 'scheduled');
   assert.equal(job.history.filter((event) => event.to === 'scheduled').length, 1);
   assert.throws(() => transition(job, 'scheduled', { actor: 'offline-worker', approval: true }), /Invalid transition/);
+});
+
+test('workbook import preview rejects malformed rows and existing URL collisions before persistence', () => {
+  const result = validatePlanRows([
+    {
+      stable_content_id: 'circuits-support-001', site_id: 'circuits-at-home', cluster_id: 'multimeters',
+      title: 'How to choose a multimeter', primary_query: 'how to choose a multimeter', intent: 'informational',
+      type: 'supporting_article', slug: 'how-to-choose-a-multimeter', proposed_url: 'https://circuitsathome.com/how-to-choose-a-multimeter',
+      action: 'NEW', target_core_id: 'core-multimeters', priority: 'high', evidence_status: 'verified',
+      review_tier: 'standard', status: 'planned', scheduled_for: '2026-10-15'
+    },
+    {
+      stable_content_id: 'circuits-support-001', site_id: 'circuits-at-home', cluster_id: 'multimeters',
+      title: 'Duplicate', primary_query: 'duplicate', intent: 'informational', type: 'supporting_article',
+      slug: 'how-to-choose-a-multimeter', proposed_url: 'https://circuitsathome.com/existing', action: 'NEW',
+      target_core_id: 'not-approved', priority: 'low', evidence_status: 'partial', review_tier: 'light', status: 'planned', scheduled_for: 'not-a-date'
+    }
+  ], {
+    siteId: 'circuits-at-home', knownCoreIds: ['core-multimeters'],
+    existingInventory: [{ canonical_url: 'https://circuitsathome.com/existing' }]
+  });
+  assert.equal(result.valid, false);
+  assert.deepEqual(result.errors.map((error) => error.code), [
+    'duplicate_content_id', 'duplicate_slug', 'existing_url_collision', 'unknown_core_id', 'invalid_schedule_date'
+  ]);
+  assert.deepEqual(result.changes.map((change) => change.outcome), ['preview_only', 'blocked']);
 });
