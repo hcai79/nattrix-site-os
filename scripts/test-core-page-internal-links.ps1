@@ -12,6 +12,9 @@ param(
     [ValidateRange(1, 1000)]
     [int]$MaxPages = 40,
 
+    [ValidateRange(0, 1000)]
+    [int]$SkipPages = 0,
+
     [ValidateRange(0, 10000)]
     [int]$ThrottleMilliseconds = 250
 )
@@ -28,7 +31,7 @@ if (-not $inventory -or -not ($inventory[0].PSObject.Properties.Name -contains '
     throw 'InventoryPath must be a CSV with a url column.'
 }
 
-$pages = $inventory | Select-Object -First $MaxPages
+$pages = $inventory | Select-Object -Skip $SkipPages -First $MaxPages
 $links = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
 $linkSources = @{}
 

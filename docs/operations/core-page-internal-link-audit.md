@@ -18,6 +18,9 @@ Use the resulting CSV to identify reachable URLs and failures. Before any repair
 confirm that the source link is actually incorrect and that its proposed replacement
 is the intended live destination.
 
+For the next bounded batch, add `-SkipPages 5`; increase the skip value by the prior
+batch size. This avoids an unbounded production crawl.
+
 ## Guardrails
 
 - Keep the batch bounded and use the default throttle.
