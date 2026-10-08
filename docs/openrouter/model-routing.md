@@ -44,3 +44,7 @@ Treat text/vision/image models as capability-specific. Evaluate actual image out
 
 ## Credentials
 Server-side OPENROUTER_API_KEY only. Never put it in front-end bundles, public GitHub, exported n8n workflows or agent prompts. Use environment variables/secret vault; key budgets and rotation.
+
+## User-researched model candidates (October 2026)
+
+See [2026 model research matrix](user-research-2026-model-matrix.md). It is a hypothesis set supplied by the owner and must not be treated as verified pricing, current model availability, or routing configuration. Use live OpenRouter model metadata and benchmark data before enabling any candidate.
