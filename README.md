@@ -49,3 +49,7 @@ CircuitsAtHome is the first implementation, not a one-off build. Shared function
 ## Safety
 
 Do not place production credentials, API keys, WordPress application passwords, affiliate credentials, or Supabase service keys in this repository.
+
+## WordPress onboarding
+
+Before a site is connected, follow the [WordPress site installation baseline](docs/development/wordpress-site-installation-baseline.md). It preserves the existing theme and plugin stack while the Site OS validates a staging-only, read-only inventory first.

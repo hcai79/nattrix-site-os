@@ -1,0 +1,18 @@
+{
+  "site_id": "replace-with-site-id",
+  "production_domain": "example.com",
+  "staging_base_url": null,
+  "inventory_complete": false,
+  "backup_restore_verified": false,
+  "wordpress_core_version": null,
+  "php_version": null,
+  "active_theme": null,
+  "active_plugins": [],
+  "seo_plugin": null,
+  "cache_owner": null,
+  "security_owner": null,
+  "integration_account_role": null,
+  "reviewer": null,
+  "production_writes_authorized": false,
+  "notes": "No credential values belong in this file."
+}
