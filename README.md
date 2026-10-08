@@ -39,6 +39,7 @@ wordpress/            Shared WordPress plugin
 database/             Supabase schema and migrations
 automations/          n8n workflows
 packages/             Shared schemas, rules and types
+sites/                Per-site configuration and operating records
 docs/                 Architecture, roadmap and site strategies
 ```
 
@@ -49,3 +50,9 @@ CircuitsAtHome is the first implementation, not a one-off build. Shared function
 ## Safety
 
 Do not place production credentials, API keys, WordPress application passwords, affiliate credentials, or Supabase service keys in this repository.
+
+## Multi-site organization
+
+Shared platform behavior belongs in `wordpress/`, `packages/`, `agents/`, and `automations/`. Each site's strategy, configuration, backlog, and operational records belong in `sites/<site-key>/` and `docs/sites/<site-key>/`.
+
+Start a new site from `sites/_template/`. Site folders may contain non-secret configuration and decisions, but never WordPress credentials, affiliate credentials, or copied production exports.

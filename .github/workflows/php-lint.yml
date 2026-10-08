@@ -1,0 +1,42 @@
+name: PHP lint
+
+on:
+  push:
+    paths:
+      - 'wordpress/**/*.php'
+      - 'sites/**/*.json'
+      - 'scripts/validate-site-packages.ps1'
+      - '.github/workflows/php-lint.yml'
+  pull_request:
+    paths:
+      - 'wordpress/**/*.php'
+      - 'sites/**/*.json'
+      - 'scripts/validate-site-packages.ps1'
+      - '.github/workflows/php-lint.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: PHP syntax
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          tools: none
+          coverage: none
+
+      - name: Lint shared WordPress plugin
+        shell: bash
+        run: |
+          find wordpress -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Validate site packages
+        shell: pwsh
+        run: ./scripts/validate-site-packages.ps1

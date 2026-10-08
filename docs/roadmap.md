@@ -5,7 +5,7 @@
 - [x] Global AGENTS.md
 - [x] Specialist agent contracts
 - [x] CircuitsAtHome strategy
-- [ ] CI baseline
+- [x] CI baseline
 
 ## Milestone 2: Portfolio Engine v0.1
 - [ ] Plugin bootstrap

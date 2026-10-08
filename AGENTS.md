@@ -74,6 +74,27 @@ Its commercial strategy centers on a Core 30 of high-intent landing pages suppor
 - Make failures observable.
 - Use staging before production.
 
+## Model routing and token discipline
+
+Use the least expensive capable model for the task. Preserve high-reasoning capacity for decisions where it materially reduces risk.
+
+| Work type | Default model tier | Examples |
+| --- | --- | --- |
+| Mechanical, bounded, or formatting work | Fast / low-cost | file inventory, CSV cleanup, link checks, metadata normalization, template filling, routine status summaries |
+| Normal implementation and content strategy | Standard | feature work, SEO briefs, editorial QA, internal-link analysis, documentation |
+| High-risk or ambiguous reasoning | Frontier | security review, irreversible migrations, cross-site architecture, legal or policy-sensitive recommendations, complex production incident analysis |
+
+Rules:
+
+1. Batch independent low-risk work instead of repeatedly opening new high-reasoning tasks.
+2. Give lightweight agents explicit inputs, output schemas, and stop conditions.
+3. Escalate to a stronger model when evidence conflicts, a decision affects multiple sites, or human approval is required.
+4. Do not use a lower-cost model as a substitute for required human approval.
+5. Store reusable research, templates, and decisions in the repository so work is not repeated.
+6. Use read-only inspection before proposing changes to an existing site.
+
+See `docs/operations/model-routing.md` for the operational playbook.
+
 ## Agent handoff flow
 
 SEO Opportunity -> Content Strategy -> Research -> Writer -> Visual Content -> SEO QA -> Internal Linking -> Monetization -> Human Approval / Publish

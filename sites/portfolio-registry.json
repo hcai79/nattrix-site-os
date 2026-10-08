@@ -1,0 +1,11 @@
+{
+  "$schema": "../packages/shared-types/schemas/site-manifest.schema.json",
+  "sites": [
+    {
+      "site_key": "techvideoblog",
+      "manifest": "techvideoblog/site.json",
+      "lifecycle": "active",
+      "production_access": "read_only_by_default"
+    }
+  ]
+}

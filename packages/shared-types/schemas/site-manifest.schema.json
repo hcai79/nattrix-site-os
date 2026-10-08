@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nattrix.local/schemas/site-manifest.schema.json",
+  "title": "Nattrix Site Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["site_key", "display_name", "public_url", "cms", "content_model", "approval_policy", "integrations"],
+  "properties": {
+    "site_key": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "display_name": { "type": "string", "minLength": 1 },
+    "public_url": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "cms": { "type": "string", "enum": ["wordpress"] },
+    "content_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["commercial_content", "informational_content"],
+      "properties": {
+        "commercial_content": { "type": "string", "enum": ["page", "post", "custom-post-type"] },
+        "informational_content": { "type": "string", "enum": ["page", "post", "custom-post-type"] },
+        "directory_url_base": { "type": "string", "pattern": "^/.+/$" }
+      }
+    },
+    "approval_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["publish", "major_updates", "url_changes"],
+      "properties": {
+        "publish": { "type": "string", "enum": ["human_required", "delegated", "not_allowed"] },
+        "major_updates": { "type": "string", "enum": ["human_required", "delegated", "not_allowed"] },
+        "url_changes": { "type": "string", "enum": ["owner_required", "not_allowed"] }
+      }
+    },
+    "integrations": {
+      "type": "object",
+      "additionalProperties": { "type": ["string", "boolean"] }
+    }
+  }
+}
