@@ -1,0 +1,41 @@
+core_id,cluster,page_type,title,url,source_id,primary_keyword,intent,role,review_required
+1,Category Pillars,Category,Best AI Video Tools,https://techvideoblog.com/tool-category/best-ai-video-tools/,810,best ai video tools,Commercial investigation,Portfolio entry pillar,Yes
+2,Category Pillars,Category,Best AI Video Editors,https://techvideoblog.com/tool-category/best-ai-video-editors/,808,best ai video editors,Commercial investigation,Editing pillar,Yes
+3,Category Pillars,Category,Best AI Video Generators,https://techvideoblog.com/tool-category/best-ai-video-generators/,809,best ai video generators,Commercial investigation,Generation pillar,Yes
+4,Category Pillars,Category,Best AI Avatar Tools,https://techvideoblog.com/tool-category/best-ai-avatar-tools/,688,best ai avatar tools,Commercial investigation,Avatar pillar,Yes
+5,Category Pillars,Category,Best AI Caption Generators,https://techvideoblog.com/tool-category/best-ai-caption-generators/,803,best ai caption generators,Commercial investigation,Caption pillar,Yes
+6,Category Pillars,Category,Best AI Subtitle Generators,https://techvideoblog.com/tool-category/best-ai-subtitle-generators/,686,best ai subtitle generators,Commercial investigation,Subtitle pillar,Yes
+7,Category Pillars,Category,Best Long Video to Shorts Tools,https://techvideoblog.com/tool-category/best-long-video-to-shorts-tools/,813,best long video to shorts tools,Commercial investigation,Repurposing pillar,Yes
+8,Category Pillars,Category,Best Podcast to Shorts Tools,https://techvideoblog.com/tool-category/best-podcast-to-shorts-tools/,687,best podcast to shorts tools,Commercial investigation,Podcast repurposing pillar,Yes
+9,Category Pillars,Category,Best AI Thumbnail Generators,https://techvideoblog.com/tool-category/best-ai-thumbnail-generators/,806,best ai thumbnail generators,Commercial investigation,Thumbnail pillar,Yes
+10,Category Pillars,Category,Best AI Voice Cloning Tools,https://techvideoblog.com/tool-category/best-ai-voice-cloning-tools/,690,best ai voice cloning tools,Commercial investigation,Voice pillar,Yes
+11,Category Pillars,Category,Best AI Video Translators,https://techvideoblog.com/tool-category/best-ai-video-translators/,689,best ai video translators,Commercial investigation,Translation pillar,Yes
+12,Category Pillars,Category,Best Video to Text Tools,https://techvideoblog.com/tool-category/best-video-to-text-tools/,692,best video to text tools,Commercial investigation,Transcription pillar,Yes
+13,Tool Reviews,Review,Opus Clip Review,https://techvideoblog.com/tools/opus-clip-review/,840,opus clip review,Commercial investigation,Repurposing decision page,Yes
+14,Tool Reviews,Review,Submagic Review,https://techvideoblog.com/tools/submagic-review/,851,submagic review,Commercial investigation,Caption decision page,Yes
+15,Tool Reviews,Review,CapCut Review,https://techvideoblog.com/tools/capcut-review/,676,capcut review,Commercial investigation,Editing decision page,Yes
+16,Tool Reviews,Review,Descript Review,https://techvideoblog.com/tools/descript-review/,678,descript review,Commercial investigation,Editing and transcription decision page,Yes
+17,Tool Reviews,Review,HeyGen Review,https://techvideoblog.com/tools/heygen-review/,830,heygen review,Commercial investigation,Avatar decision page,Yes
+18,Tool Reviews,Review,Runway Review,https://techvideoblog.com/tools/runway-review/,680,runway review,Commercial investigation,Generation decision page,Yes
+19,Tool Reviews,Review,Pika Review,https://techvideoblog.com/tools/pika-review/,843,pika review,Commercial investigation,Generation decision page,Yes
+20,Tool Reviews,Review,VEED Review,https://techvideoblog.com/tools/veed-review/,677,veed review,Commercial investigation,Editing decision page,Yes
+21,Tool Reviews,Review,Synthesia Review,https://techvideoblog.com/tools/synthesia-review/,679,synthesia review,Commercial investigation,Avatar decision page,Yes
+22,Tool Reviews,Review,ElevenLabs Review,https://techvideoblog.com/tools/elevenlabs-review/,827,elevenlabs review,Commercial investigation,Voice decision page,Yes
+23,Comparisons,Comparison,Opus Clip vs Klap,https://techvideoblog.com/compare/opus-clip-vs-klap/,865,opus clip vs klap,Commercial investigation,Repurposing comparison,Yes
+24,Comparisons,Comparison,Opus Clip vs Vizard,https://techvideoblog.com/compare/opus-clip-vs-vizard/,694,opus clip vs vizard,Commercial investigation,Repurposing comparison,Yes
+25,Comparisons,Comparison,Submagic vs Captions.ai,https://techvideoblog.com/compare/submagic-vs-captions-ai/,870,submagic vs captions ai,Commercial investigation,Caption comparison,Yes
+26,Comparisons,Comparison,Submagic vs VEED,https://techvideoblog.com/compare/submagic-vs-veed/,699,submagic vs veed,Commercial investigation,Caption comparison,Yes
+27,Comparisons,Comparison,HeyGen vs Synthesia,https://techvideoblog.com/compare/heygen-vs-synthesia/,863,heygen vs synthesia,Commercial investigation,Avatar comparison,Yes
+28,Comparisons,Comparison,HeyGen vs D-ID,https://techvideoblog.com/compare/heygen-vs-d-id/,701,heygen vs d-id,Commercial investigation,Avatar comparison,Yes
+29,Comparisons,Comparison,Runway vs Pika,https://techvideoblog.com/compare/runway-vs-pika/,868,runway vs pika,Commercial investigation,Generation comparison,Yes
+30,Comparisons,Comparison,Pictory vs InVideo,https://techvideoblog.com/compare/pictory-vs-invideo/,698,pictory vs invideo,Commercial investigation,Generation comparison,Yes
+31,Comparisons,Comparison,CapCut vs Adobe Premiere Pro,https://techvideoblog.com/compare/capcut-vs-adobe-premiere-pro/,857,capcut vs adobe premiere pro,Commercial investigation,Editing comparison,Yes
+32,Comparisons,Comparison,Descript vs Riverside,https://techvideoblog.com/compare/descript-vs-riverside/,697,descript vs riverside,Commercial investigation,Recording and editing comparison,Yes
+33,Use Cases and Platforms,Use Case,Best AI Tools For YouTube Shorts,https://techvideoblog.com/use-cases/best-ai-tools-for-youtube-shorts/,702,best ai tools for youtube shorts,Commercial investigation,Short-form workflow pillar,Yes
+34,Use Cases and Platforms,Use Case,Best AI Tools For TikTok Videos,https://techvideoblog.com/use-cases/best-ai-tools-for-tiktok-videos/,703,best ai tools for tiktok videos,Commercial investigation,TikTok workflow pillar,Yes
+35,Use Cases and Platforms,Use Case,Best AI Tools For Faceless YouTube,https://techvideoblog.com/use-cases/best-ai-tools-for-faceless-youtube/,704,best ai tools for faceless youtube,Commercial investigation,Faceless workflow pillar,Yes
+36,Use Cases and Platforms,Use Case,Best AI Tools for Podcast Clips,https://techvideoblog.com/use-cases/best-ai-tools-for-podcast-clips/,879,best ai tools for podcast clips,Commercial investigation,Podcast workflow pillar,Yes
+37,Use Cases and Platforms,Use Case,Best AI Tools For Product Demo Videos,https://techvideoblog.com/use-cases/best-ai-tools-for-product-demo-videos/,708,best ai tools for product demo videos,Commercial investigation,Product demo workflow pillar,Yes
+38,Use Cases and Platforms,Use Case,Best AI Tools For Course Creators,https://techvideoblog.com/use-cases/best-ai-tools-for-course-creators/,707,best ai tools for course creators,Commercial investigation,Course workflow pillar,Yes
+39,Use Cases and Platforms,Platform,Best AI Tools For YouTube,https://techvideoblog.com/platforms/best-ai-tools-for-youtube/,716,best ai tools for youtube,Commercial investigation,YouTube platform pillar,Yes
+40,Use Cases and Platforms,Platform,Best AI Video Editors for iPhone in 2026,https://techvideoblog.com/platforms/best-ai-video-editors-for-iphone/,720,best ai video editors for iphone,Commercial investigation,Mobile editing platform pillar,Yes

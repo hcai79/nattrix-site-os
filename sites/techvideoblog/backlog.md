@@ -5,7 +5,8 @@ All items below are local planning work. They must be based on a fresh content i
 | Priority | Work item | Outcome | Evidence needed | Status |
 | --- | --- | --- | --- | --- |
 | P0 | Create complete content inventory | One local source for pages, posts, type, URL, parent, status, and modified date | `inventory/2026-10-08-content-inventory.csv` | Complete |
-| P0 | Repair confirmed primary-hub 404s | Replace or remove the 18 confirmed 404 destinations found on the homepage and primary directory hubs, after target mapping approval | `audits/2026-10-08-directory-link-audit.csv` | Needs owner approval |
+| P0 | Repair confirmed primary-hub 404s | Eight exact broken href instances are repaired and verified. Map or remove the remaining candidate and gap destinations. | `audits/2026-10-08-directory-link-audit.csv` | In progress |
+| P0 | Establish Core 40 routing model | Core 40 is defined and the Tool Categories parent page is upgraded as the first pillar. Continue through the remaining priority pillars. | `core/core-40.csv` and `docs/sites/techvideoblog/core-40-strategy.md` | In progress |
 | P1 | Complete site-wide internal-link audit | Extend the initial 75-link audit across all published Pages and Posts | Read-only crawl and destination validation | Planned |
 | P0 | Audit commercial-page templates | Identify missing verdict, fit guidance, pricing caveat, methodology, disclosure, and links | Five-profile audit in `audits/2026-10-08-tool-profile-quality-audit.md` | In progress |
 | P0 | Audit AI-agent Post cohort | Apply structural, intent, duplicate, claim, and internal-link QA to all 88 Posts published from August through October 2026 | `docs/sites/techvideoblog/ai-content-qa-workflow.md` and read-only post inspection | In progress |
