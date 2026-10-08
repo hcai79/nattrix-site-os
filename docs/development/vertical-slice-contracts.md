@@ -14,6 +14,7 @@
 - Workbook-row validation that rejects duplicate content IDs, duplicate slugs, unapproved core relations, malformed dates, and `NEW` URL collisions before any state is saved.
 - A dependency-free CSV serializer and parser that preserve quoted values and reject malformed rows before validation.
 - A five-item maximum batch runner with stable content IDs, idempotent re-queueing, and auditable return-to-correction behavior.
+- A media-manifest validator that tracks asset provenance, enforces accessible alt text, blocks generated exact-product representations, and queues technical visuals for human review.
 - Research evidence validation that blocks high-impact claims without a valid source URL and uses documented risk dimensions to set review depth.
 
 ## Deliberately deferred

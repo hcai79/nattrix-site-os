@@ -6,3 +6,4 @@ export { validatePlanRows } from './workbook.js';
 export { validateEvidencePack, calculateRiskBand } from './evidence.js';
 export { exportCsv, parseCsv } from './csv.js';
 export { BatchRunner } from './batch-runner.js';
+export { validateMediaManifest } from './media.js';

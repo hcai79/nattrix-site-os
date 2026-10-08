@@ -18,6 +18,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `calculateRiskBand(dimensions)` maps documented risk dimensions to a required review depth.
 - `exportCsv(rows, columns)` and `parseCsv(csv)` enable a dependency-free, round-trip-safe CSV boundary before workbook file adapters are introduced.
 - `BatchRunner` queues no more than five unique items, preserves job identity, and supports auditable correction/resume behavior without publishing.
+- `validateMediaManifest(manifest)` records media provenance, rejects generated exact-product imagery, and identifies visuals requiring human review.
 
 ## Security boundary
 

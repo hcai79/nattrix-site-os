@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows,
-  validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner
+  validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -172,4 +172,20 @@ test('five-item batch runner is idempotent and resumes corrected work without du
   job = runner.returnForCorrection('circuits-1', 'researching', { actor: 'reviewer', reason: 'source needed' });
   assert.equal(job.state, 'researching');
   assert.equal(runner.snapshot().filter((item) => item.id === 'circuits-1').length, 1);
+});
+
+test('media manifest blocks generated exact product imagery and queues technical graphics for review', () => {
+  const manifest = validateMediaManifest({
+    content_id: 'circuits-1',
+    assets: [
+      { asset_id: 'asset-1', type: 'wiring_diagram', origin: 'original', rights_note: 'Created from approved research.', alt_text: 'Multimeter probe placement diagram.' },
+      { asset_id: 'asset-2', type: 'product_image', origin: 'generated', exact_product_representation: true, rights_note: 'Generated test asset.', alt_text: 'Product image.' }
+    ]
+  });
+  assert.equal(manifest.valid, false);
+  assert.deepEqual(manifest.errors, [{ asset: 2, code: 'generated_exact_product_prohibited' }]);
+  assert.deepEqual(manifest.reviewQueue, [
+    { asset: 1, asset_id: 'asset-1', reason: 'mandatory_human_visual_review' },
+    { asset: 2, asset_id: 'asset-2', reason: 'product_accuracy_review' }
+  ]);
 });
