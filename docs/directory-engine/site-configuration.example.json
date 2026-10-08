@@ -1,0 +1,48 @@
+{
+  "siteKey": "beautyinfospot",
+  "domain": "beautyinfospot.com",
+  "siteType": "local_directory",
+  "vertical": "aesthetic_med_spa",
+  "launchMarket": {
+    "country": "US",
+    "state": "NV",
+    "city": "Las Vegas"
+  },
+  "expansionMode": "gated",
+  "features": {
+    "businessProfiles": true,
+    "treatments": true,
+    "locationPages": true,
+    "claimListing": true,
+    "consultationLeads": true,
+    "paidPlacements": false,
+    "autopublish": false,
+    "automatedOutreach": false
+  },
+  "routing": {
+    "directoryRoot": "/med-spas/",
+    "treatmentRoot": "/treatments/",
+    "cityPattern": "/med-spas/{state-slug}/{city-slug}/",
+    "businessPattern": "/med-spas/{state-slug}/{city-slug}/{business-slug}/",
+    "treatmentCityPattern": "/{treatment-slug}/{city-slug}-{state-code}/"
+  },
+  "qualityGates": {
+    "humanApprovalRequired": true,
+    "minimumVerifiedProvidersForCityPage": 5,
+    "medicalClaimReviewRequired": true,
+    "requireFieldProvenance": true,
+    "allowFabricatedReviews": false
+  },
+  "monetization": {
+    "freeListing": true,
+    "featuredListingTestMonthlyUSD": [
+      149,
+      249
+    ],
+    "leadTestPriceUSD": [
+      40,
+      100
+    ],
+    "sponsoredDisclosureRequired": true
+  }
+}
