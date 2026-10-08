@@ -36,7 +36,10 @@ verification.
 
 Planned supporting Posts use a `PLAN-TVB-###` Content ID. Their URL stays blank until
 publication, while the proposed slug, planned publish date, and exactly one Primary
-Core Target make the queue schedulable and reviewable.
+Core Target make the queue schedulable and reviewable. Every planned item also has one
+Primary Target Keyword: an informational keyword seed that should support, rather than
+duplicate, the assigned Core page's commercial keyword. Validate demand and SERP fit in
+the research brief before drafting or publishing.
 
 The initial plan schedules one informational Post per day for 40 consecutive days.
 Every planned Post supports one distinct Core 40 page with a single natural contextual
