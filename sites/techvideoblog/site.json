@@ -1,0 +1,23 @@
+{
+  "$schema": "../../packages/shared-types/schemas/site-manifest.schema.json",
+  "site_key": "techvideoblog",
+  "display_name": "TechVideoBlog",
+  "public_url": "https://techvideoblog.com",
+  "cms": "wordpress",
+  "content_model": {
+    "commercial_content": "page",
+    "informational_content": "post",
+    "directory_url_base": "/tool-category/"
+  },
+  "approval_policy": {
+    "publish": "human_required",
+    "major_updates": "human_required",
+    "url_changes": "owner_required"
+  },
+  "integrations": {
+    "wordpress_mcp": "connected_read_only_by_default",
+    "rank_math": "present",
+    "acf": "present",
+    "portfolio_engine": "not_installed"
+  }
+}

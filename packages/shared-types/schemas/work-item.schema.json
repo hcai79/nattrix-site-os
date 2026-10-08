@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nattrix.local/schemas/work-item.schema.json",
+  "title": "Nattrix Work Item",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "site_key", "type", "title", "priority", "status", "approval_required"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "site_key": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "type": { "type": "string", "enum": ["inventory", "audit", "brief", "draft", "refresh", "technical", "integration"] },
+    "title": { "type": "string", "minLength": 1 },
+    "priority": { "type": "string", "enum": ["P0", "P1", "P2", "P3"] },
+    "status": { "type": "string", "enum": ["ready", "planned", "in-progress", "blocked", "complete"] },
+    "approval_required": { "type": "boolean" },
+    "evidence": { "type": "array", "items": { "type": "string" } },
+    "owner_note": { "type": "string" }
+  }
+}

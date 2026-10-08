@@ -1,0 +1,20 @@
+{
+  "$schema": "../../packages/shared-types/schemas/site-manifest.schema.json",
+  "site_key": "example-site",
+  "display_name": "Example Site",
+  "public_url": "https://example.com",
+  "cms": "wordpress",
+  "content_model": {
+    "commercial_content": "page",
+    "informational_content": "post"
+  },
+  "approval_policy": {
+    "publish": "human_required",
+    "major_updates": "human_required",
+    "url_changes": "owner_required"
+  },
+  "integrations": {
+    "wordpress_mcp": false,
+    "portfolio_engine": "planned"
+  }
+}

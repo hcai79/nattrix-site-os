@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nattrix.local/schemas/content-inventory-item.schema.json",
+  "title": "Nattrix Content Inventory Item",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["site_key", "source_id", "content_type", "status", "title", "url", "slug", "modified_at"],
+  "properties": {
+    "site_key": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "source_id": { "type": ["integer", "string"] },
+    "content_type": { "type": "string", "enum": ["page", "post", "product", "other"] },
+    "status": { "type": "string", "enum": ["publish", "draft", "pending", "private", "future"] },
+    "title": { "type": "string" },
+    "url": { "type": "string", "format": "uri", "pattern": "^https://" },
+    "slug": { "type": "string" },
+    "parent_source_id": { "type": ["integer", "string", "null"] },
+    "modified_at": { "type": "string", "format": "date-time" },
+    "last_audited_at": { "type": ["string", "null"], "format": "date-time" },
+    "notes": { "type": "string" }
+  }
+}

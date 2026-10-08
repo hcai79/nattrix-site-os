@@ -4,10 +4,14 @@ on:
   push:
     paths:
       - 'wordpress/**/*.php'
+      - 'sites/**/*.json'
+      - 'scripts/validate-site-packages.ps1'
       - '.github/workflows/php-lint.yml'
   pull_request:
     paths:
       - 'wordpress/**/*.php'
+      - 'sites/**/*.json'
+      - 'scripts/validate-site-packages.ps1'
       - '.github/workflows/php-lint.yml'
 
 permissions:
@@ -32,3 +36,7 @@ jobs:
         shell: bash
         run: |
           find wordpress -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
+      - name: Validate site packages
+        shell: pwsh
+        run: ./scripts/validate-site-packages.ps1
