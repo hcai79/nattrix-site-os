@@ -32,6 +32,18 @@ there is no verified replacement destination for either source link.
 Do not change either source link to the redirect target. The redirect or the intended
 page URL needs an owner-approved production diagnosis before any repair.
 
+## Additional Core audit findings
+
+The first tool-review audit batch found two further unavailable destinations:
+
+- Opus Clip Review and Submagic Review both link to `/compare/submagic-vs-opus-clip/`,
+  which returns a 404. No matching published comparison was found in the local Core
+  plan, so this needs an editorial decision rather than a generic replacement.
+- Opus Clip Review used `/tool-category/long-video-to-shorts/` in its breadcrumb.
+  Its exact Core category destination, `/tool-category/best-long-video-to-shorts-tools/`,
+  is published and returns HTTP 200. The source href was repaired and re-verified on
+  2026-10-08 without changing the page title, slug, hierarchy, or metadata.
+
 ## Content or navigation gaps
 
 These paths have no sufficiently relevant published page found in the read-only search. Do not redirect them to a generic hub merely to remove a 404.
