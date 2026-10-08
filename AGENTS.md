@@ -83,3 +83,19 @@ The Visual Content Agent may run in parallel with later editorial steps when its
 Refresh Agent runs on existing URLs based on performance changes.
 
 Portfolio Manager prioritizes work across all connected sites.
+
+
+## Nattrix Site OS 2.0 priority and model gateway
+
+The immediate build priority is the **end-to-end vertical research -> content workbook -> five finished WordPress drafts** workflow defined at `docs/milestones/vertical-slice-v0.1.md`, not expanding the plugin in isolation.
+
+Read:
+- `docs/architecture-v2.md`
+- `docs/openrouter/model-routing.md`
+- `docs/automation/end-to-end-pilot.md`
+- `docs/automation/five-site-pilot.md`
+- `docs/automation/experiment-and-optimization.md`
+
+Route runtime text-model calls via a **server-side OpenRouter adapter** with task-based model allowlists and usage tracking. The model selector must minimize observed cost per accepted result subject to task quality and safety thresholds. Credentials are never sent to LLM prompts or checked into public GitHub.
+
+Create an offline/mock provider path and deterministic fixtures for integration tests. Never use a live paid API request in CI. The human approval gate remains mandatory for commercial Core pages, safety-sensitive technical material, and live production publication.
