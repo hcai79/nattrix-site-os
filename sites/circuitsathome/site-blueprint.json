@@ -1,0 +1,36 @@
+{
+  "site_id": "circuits-at-home",
+  "domain": "circuitsathome.com",
+  "status": "pilot",
+  "wp_staging_base": null,
+  "locale": "en-US",
+  "audience": "Makers, hobbyists, students, and technicians who need practical electronics tools and test equipment guidance.",
+  "positioning": "Practical electronics tools, test equipment, and DIY electronics guidance.",
+  "monetization_modes": ["affiliate", "editorial"],
+  "competitor_seed_domains": [],
+  "existing_url_policy": "preserve_and_review",
+  "cluster_policies": {
+    "commercial_pages": "human_approval_required",
+    "supporting_articles": "human_review_required_during_pilot"
+  },
+  "content_mix": {
+    "core_commercial": 0.3,
+    "supporting_informational": 0.7
+  },
+  "cadence_per_week": 5,
+  "style_token_profile": "electronics-practical-v1",
+  "block_templates": [],
+  "legal_disclosures": ["affiliate_disclosure_required"],
+  "reviewer": "owner",
+  "escalation_rules": ["electrical_safety", "unverified_product_specification"],
+  "evidence_thresholds": {
+    "commercial_claims": "source_linked",
+    "electrical_safety": "expert_review_required"
+  },
+  "media_policy": "original_or_lawfully_licensed_with_provenance",
+  "spend_caps": {
+    "monthly_usd": 50,
+    "per_article_usd": 2
+  },
+  "experiment_policy": "human_approval_required"
+}

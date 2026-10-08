@@ -1,0 +1,7 @@
+{
+  "name": "@nattrix/workflow-core",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Offline-safe contracts and deterministic adapters for the Nattrix vertical slice."
+}
