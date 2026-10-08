@@ -12,6 +12,7 @@
 - Pre-spend global, per-site, and per-content budget checks with telemetry records.
 - A sequential workflow state machine with audit history, required human approval gates, and explicit correction retries.
 - Workbook-row validation that rejects duplicate content IDs, duplicate slugs, unapproved core relations, malformed dates, and `NEW` URL collisions before any state is saved.
+- Research evidence validation that blocks high-impact claims without a valid source URL and uses documented risk dimensions to set review depth.
 
 ## Deliberately deferred
 

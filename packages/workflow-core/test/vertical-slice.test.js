@@ -3,7 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
-  BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows
+  BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows,
+  validateEvidencePack, calculateRiskBand
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -132,4 +133,19 @@ test('workbook import preview rejects malformed rows and existing URL collisions
     'duplicate_content_id', 'duplicate_slug', 'existing_url_collision', 'unknown_core_id', 'invalid_schedule_date'
   ]);
   assert.deepEqual(result.changes.map((change) => change.outcome), ['preview_only', 'blocked']);
+});
+
+test('high-impact claims without citations are blocked and safety-sensitive work receives expert review', () => {
+  const evidence = validateEvidencePack({
+    checkedAt: '2026-10-08',
+    claims: [{
+      text: 'This meter has a CAT III rating.', class: 'verified_fact', impact: 'high',
+      confidence: 95, source_type: 'manufacturer_manual', checked_at: '2026-10-08'
+    }]
+  });
+  assert.equal(evidence.publishable, false);
+  assert.deepEqual(evidence.reviewTriggers, [{ claim: 1, reason: 'high_impact_claim_missing_citation', blocking: true }]);
+  assert.deepEqual(calculateRiskBand({ commercial: 3, technical: 3, uncertainty: 2, visual: 3, change: 1 }), {
+    total: 12, band: 'critical', requiredReview: 'owner_or_domain_expert'
+  });
 });

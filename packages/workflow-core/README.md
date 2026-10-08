@@ -14,6 +14,8 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `transition(job, nextState, options)` implements the documented workflow sequence and records approval gates.
 - `retryFrom(job, state, options)` creates an auditable, resumable correction transition without duplicate publishing behavior.
 - `validatePlanRows(rows, context)` validates editable workbook rows and produces a non-persisting collision and evidence preview.
+- `validateEvidencePack(pack)` blocks uncited high-impact claims and identifies human-review triggers.
+- `calculateRiskBand(dimensions)` maps documented risk dimensions to a required review depth.
 
 ## Security boundary
 
