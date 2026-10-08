@@ -1,55 +1,30 @@
-# Roadmap
+# Roadmap: Nattrix Site OS 2.0
 
-## Milestone 1: Repository and contracts
-- [x] Repository architecture
-- [x] Global AGENTS.md
-- [x] Specialist agent contracts
-- [x] CircuitsAtHome strategy
-- [ ] CI baseline
+## Product goal
+An evidence-grounded, review-gated website growth operating system that can research a vertical, create an editable content workbook, produce finished WordPress posts and media, schedule approved articles, and learn from GSC/GA4/monetization performance.
 
-## Milestone 2: Portfolio Engine v0.1
-- [ ] Plugin bootstrap
-- [ ] Product post type
-- [ ] Core Page metadata model
-- [ ] Affiliate Offer model
-- [ ] REST API namespace
-- [ ] Tests
-- [ ] Admin settings
+## First end-to-end milestone (now highest priority)
+Read docs/milestones/vertical-slice-v0.1.md.
+- [ ] Site Blueprint and URL inventory with mocked adapter
+- [ ] OpenRouter LLM gateway and cost-aware task router
+- [ ] Evidence-backed vertical and competitor research
+- [ ] Content workbook XLSX export and validated import
+- [ ] Five-article batch producer with image/visual manifest
+- [ ] Independent QA and review states
+- [ ] Gutenberg draft/scheduling staging adapter
+- [ ] Usage, cost, reviewer-time telemetry
+- [ ] Integration tests with mocks and failure replay
 
-## Milestone 3: Supabase v0.1
-- [ ] Initial schema
-- [ ] Row-level security plan
-- [ ] Seed data for CircuitsAtHome
-- [ ] Migrations
+## Follow-on milestones
+- [ ] GSC and GA4 connectors
+- [ ] Revenue/affiliate reporting
+- [ ] Controlled experiment engine
+- [ ] Multi-site Site Manager configurations
+- [ ] Five-site rollout: CircuitsAtHome, SycamoreNet, TechVideoBlog, Sybari, DogsForest
+- [ ] Safe operations automation and maintenance dashboard
 
-## Milestone 4: Dashboard v0.1
-- [ ] Next.js app
-- [ ] Portfolio overview
-- [ ] Site overview
-- [ ] Core 30 tracker
-- [ ] Approval queue
+## Existing foundation remains
+The Portfolio Engine plugin, Supabase operational data store, Next.js dashboard and n8n orchestrator remain core infrastructure. Build only the minimum subset needed for the end-to-end slice first.
 
-## Milestone 5: WordPress connection
-- [ ] Staging credentials
-- [ ] Health check
-- [ ] Read content
-- [ ] Draft content
-- [ ] Safe update workflow
-
-## Milestone 6: Search Console
-- [ ] OAuth / service integration
-- [ ] Query ingestion
-- [ ] Page ingestion
-- [ ] Opportunity rules
-- [ ] Refresh rules
-
-## Milestone 7: Automation
-- [ ] Opportunity workflow
-- [ ] Brief workflow
-- [ ] Draft workflow
-- [ ] QA workflow
-- [ ] Internal linking workflow
-- [ ] Monetization workflow
-
-## Milestone 8: Second site
-Onboard SycamoreNet only after CircuitsAtHome workflows are stable.
+## Do not
+Do not publish to production or touch live WordPress, alter existing URLs, store credentials in the repo, or auto-approve high-risk content.
