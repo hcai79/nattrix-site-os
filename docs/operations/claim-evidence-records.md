@@ -47,4 +47,3 @@ date, source type, confidence score, and status.
 ```
 
 The URLs above are illustrative and must never be copied into published content.
-
