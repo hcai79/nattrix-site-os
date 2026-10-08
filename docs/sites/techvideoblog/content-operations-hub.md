@@ -44,6 +44,10 @@ link. A task may be assigned only after the VA provides a research and draft bri
 does not add pricing, testing, feature, or product claims without current primary-source
 evidence. The plan is a controlled backlog, not authorization to publish.
 
+Use the [supporting Post brief template](supporting-post-brief-template.md) for every
+`PLAN-TVB-###` assignment. A completed brief moves to **Review**, never directly to
+production.
+
 ## Status definitions
 
 - **Backlog:** Inventory item not yet prioritized.
