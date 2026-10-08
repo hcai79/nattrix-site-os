@@ -19,6 +19,7 @@ define( 'NATTRIX_PORTFOLIO_ENGINE_DIR', plugin_dir_path( __FILE__ ) );
 require_once NATTRIX_PORTFOLIO_ENGINE_DIR . 'includes/class-plugin.php';
 require_once NATTRIX_PORTFOLIO_ENGINE_DIR . 'includes/class-content-types.php';
 require_once NATTRIX_PORTFOLIO_ENGINE_DIR . 'includes/class-meta-models.php';
+require_once NATTRIX_PORTFOLIO_ENGINE_DIR . 'includes/class-meta-boxes.php';
 require_once NATTRIX_PORTFOLIO_ENGINE_DIR . 'includes/class-rest-controller.php';
 require_once NATTRIX_PORTFOLIO_ENGINE_DIR . 'includes/class-settings.php';
 

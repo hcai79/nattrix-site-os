@@ -22,6 +22,8 @@ Posts and pages can carry these REST-visible, editor-authorized fields:
 - `nattrix_core_priority`: integer from 0 through 100
 - `nattrix_core_review_state`: `draft`, `needs_review`, or `approved`
 
+Editors with permission can manage these values through the **Nattrix Core Page** sidebar panel. The panel uses a WordPress nonce, post capability check, output escaping, and field-specific sanitization.
+
 ### Affiliate Offer references
 
 Product records hold a sanitized `nattrix_affiliate_offers` array. Each reference has an `offer_id`, merchant name, destination URL, optional affiliate URL, disclosure label, and status. Article HTML must refer to a Product or Offer record rather than contain a copied affiliate URL.

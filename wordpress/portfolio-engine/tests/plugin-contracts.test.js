@@ -33,3 +33,12 @@ test('Portfolio Engine custom REST routes require authorization callbacks', asyn
   assert.match(source, /current_user_can\( 'manage_options' \)/);
   assert.match(source, /current_user_can\( 'edit_post', \$post_id \)/);
 });
+
+test('Portfolio Engine Core Page editor panel verifies intent and editing permission', async () => {
+  const source = await readPluginFile('includes/class-meta-boxes.php');
+  assert.match(source, /wp_nonce_field\( 'nattrix_save_core_page', 'nattrix_core_page_nonce' \)/);
+  assert.match(source, /wp_verify_nonce\( \$nonce, 'nattrix_save_core_page' \)/);
+  assert.match(source, /current_user_can\( 'edit_post', \$post_id \)/);
+  assert.match(source, /sanitize_text_field/);
+  assert.match(source, /esc_attr/);
+});
