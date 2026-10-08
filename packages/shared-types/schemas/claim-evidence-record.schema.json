@@ -1,0 +1,88 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://nattrix.local/schemas/claim-evidence-record.schema.json",
+  "title": "Nattrix Claim Evidence Record",
+  "description": "Portable, non-secret evidence for a factual or editorial claim. Source URLs are public references, not affiliate destinations.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "site_key",
+    "content_url",
+    "claim",
+    "claim_class",
+    "source_url",
+    "source_type",
+    "checked_at",
+    "confidence",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "site_key": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "content_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "claim": {
+      "type": "string",
+      "minLength": 1
+    },
+    "claim_class": {
+      "type": "string",
+      "enum": [
+        "verified_fact",
+        "derived_fact",
+        "editorial_assessment",
+        "manufacturer_claim",
+        "community_sentiment"
+      ]
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri",
+      "pattern": "^https://"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "official_pricing",
+        "official_policy",
+        "official_documentation",
+        "official_help_center",
+        "manufacturer",
+        "standard",
+        "reputable_publication",
+        "retailer",
+        "community"
+      ]
+    },
+    "source_published_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "checked_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "confidence": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 100
+    },
+    "status": {
+      "type": "string",
+      "enum": ["verified", "stale", "superseded", "unresolved"]
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}
