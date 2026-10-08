@@ -27,6 +27,8 @@
 
 Run `npm test`. The tests are deterministic and do not require credentials, network access, a WordPress installation, or a paid API call.
 
+GitHub Actions runs this same command for pull requests and pushes to `main`. The workflow has read-only repository permissions and never receives a production credential or calls a model provider.
+
 ## Design decisions
 
 `workflow-core` uses standard Node.js modules only so the early contract tests can run without a package install. The expected future runtime boundary is server-only: it can add a live adapter beside the mock provider, but the test path must remain mock-only and must never expose `OPENROUTER_API_KEY` to a browser or content prompt.
