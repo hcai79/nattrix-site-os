@@ -52,6 +52,8 @@ Settings > Portfolio Engine stores only a site ID and human-readable affiliate d
 
 Run `npm test` from the repository root. The current test suite statically verifies public contract and security invariants because this development environment has no PHP or WordPress runtime. Before staging installation, run WordPress integration tests in a PHP-enabled environment.
 
+Follow the full [staging validation runbook](../../docs/development/portfolio-engine-staging-validation.md) before considering a production rollout.
+
 ## Extension points
 
 Future releases can add block rendering, staging-only draft creation, offer freshness fields, and outbound-link rendering without changing public article URLs. Any public Product archive, URL, taxonomy route, affiliate behavior, or production write remains an explicit approval decision.
