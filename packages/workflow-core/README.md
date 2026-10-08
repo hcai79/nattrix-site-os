@@ -19,6 +19,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `exportCsv(rows, columns)` and `parseCsv(csv)` enable a dependency-free, round-trip-safe CSV boundary before workbook file adapters are introduced.
 - `BatchRunner` queues no more than five unique items, preserves job identity, and supports auditable correction/resume behavior without publishing.
 - `validateMediaManifest(manifest)` records media provenance, rejects generated exact-product imagery, and identifies visuals requiring human review.
+- `MockSiteAdapter` provides a deterministic, read-only site inventory fixture and rejects any draft creation call.
 
 ## Security boundary
 

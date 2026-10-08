@@ -5,6 +5,7 @@
 ## Included boundaries
 
 - Site Blueprint validation and a CircuitsAtHome seed configuration.
+- A read-only mock site adapter and a deterministic CircuitsAtHome URL-inventory fixture.
 - A read-only inventory normalizer that rejects off-domain URLs and canonical collisions.
 - A routing-policy loader that preserves empty model allowlists until a live registry has been evaluated and approved.
 - A deterministic mock OpenRouter provider. It cannot make paid requests or read `OPENROUTER_API_KEY`.

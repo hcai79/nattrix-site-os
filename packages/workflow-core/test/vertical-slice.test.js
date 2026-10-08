@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows,
-  validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest
+  validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -13,6 +13,16 @@ const readJson = async (path) => JSON.parse(await readFile(new URL(path, root), 
 test('CircuitsAtHome blueprint meets the shared contract', async () => {
   const blueprint = await readJson('sites/circuitsathome/site-blueprint.json');
   assert.deepEqual(validateSiteBlueprint(blueprint), { valid: true, errors: [] });
+});
+
+test('mock site adapter uses fixtures for read-only inventory and rejects writes', async () => {
+  const blueprint = await readJson('sites/circuitsathome/site-blueprint.json');
+  const urlRecords = await readJson('packages/workflow-core/fixtures/circuits-url-inventory.json');
+  const adapter = new MockSiteAdapter({ blueprint, urlRecords, categories: [{ slug: 'test-equipment' }] });
+  assert.deepEqual(await adapter.getSite(), { site_id: 'circuits-at-home', domain: 'circuitsathome.com', status: 'pilot' });
+  assert.equal((await adapter.listUrlInventory())[0].canonical_url, 'https://circuitsathome.com/multimeter-buying-guide');
+  assert.deepEqual(await adapter.listCategories(), [{ slug: 'test-equipment' }]);
+  await assert.rejects(adapter.createDraft(), /read-only/);
 });
 
 test('inventory normalizes same-domain URLs and rejects canonical collisions', () => {
