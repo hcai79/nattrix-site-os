@@ -13,6 +13,7 @@
 - A sequential workflow state machine with audit history, required human approval gates, and explicit correction retries.
 - Workbook-row validation that rejects duplicate content IDs, duplicate slugs, unapproved core relations, malformed dates, and `NEW` URL collisions before any state is saved.
 - A dependency-free CSV serializer and parser that preserve quoted values and reject malformed rows before validation.
+- A five-item maximum batch runner with stable content IDs, idempotent re-queueing, and auditable return-to-correction behavior.
 - Research evidence validation that blocks high-impact claims without a valid source URL and uses documented risk dimensions to set review depth.
 
 ## Deliberately deferred

@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows,
-  validateEvidencePack, calculateRiskBand, exportCsv, parseCsv
+  validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -155,4 +155,21 @@ test('CSV export and import preserve values while rejecting malformed workbook i
   assert.deepEqual(parseCsv(csv), [{ stable_content_id: 'circuits-1', title: 'Guide, with comma', notes: 'A "quoted" note' }]);
   assert.throws(() => parseCsv('title,notes\n"unclosed,value'), /unclosed quoted cell/);
   assert.throws(() => parseCsv('title,title\nA,B'), /duplicate headers/);
+});
+
+test('five-item batch runner is idempotent and resumes corrected work without duplicate jobs', () => {
+  const runner = new BatchRunner({ batchId: 'circuits-batch-001', siteId: 'circuits-at-home' });
+  const items = Array.from({ length: 5 }, (_, index) => ({ stable_content_id: `circuits-${index + 1}`, site_id: 'circuits-at-home' }));
+  const queued = runner.enqueue(items, { actor: 'owner' });
+  assert.equal(queued.length, 5);
+  assert.equal(queued[0].state, 'batch_queued');
+  assert.equal(runner.enqueue(items, { actor: 'owner' })[0].history.length, queued[0].history.length);
+  assert.equal(runner.snapshot().length, 5);
+  assert.throws(() => runner.enqueue([...items, { stable_content_id: 'circuits-6', site_id: 'circuits-at-home' }], { actor: 'owner' }), /1 to 5/);
+
+  let job = runner.advance('circuits-1', 'researching', { actor: 'research-worker' });
+  job = runner.advance('circuits-1', 'drafted', { actor: 'writer-worker' });
+  job = runner.returnForCorrection('circuits-1', 'researching', { actor: 'reviewer', reason: 'source needed' });
+  assert.equal(job.state, 'researching');
+  assert.equal(runner.snapshot().filter((item) => item.id === 'circuits-1').length, 1);
 });
