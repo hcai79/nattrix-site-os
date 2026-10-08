@@ -11,7 +11,7 @@ findings, and engineering contracts remain in this repository.
 
 | Tab | Owner | Use |
 | --- | --- | --- |
-| Content Hub | Portfolio manager | Inventory of all published Pages and Posts, with role, QA status, next action, priority, task status, and assignee. |
+| Content Hub | Portfolio manager | Inventory of published and planned content, with role, QA status, next action, priority, task status, assignee, primary Core target, and planned publish date. |
 | VA Queue | Portfolio manager and VA | Bounded tasks with a required output, approval boundary, and safety note. |
 | Dashboard | Everyone | Current counts, decision queue, and the immediate operating picture. |
 | Read Me | Everyone | The workflow, research standard, statuses, and non-negotiable production safeguards. |
@@ -31,6 +31,18 @@ verification.
    explicit.
 6. Record any production write in both the site worklog and the relevant Content Hub
    row after verification.
+
+## Planned content protocol
+
+Planned supporting Posts use a `PLAN-TVB-###` Content ID. Their URL stays blank until
+publication, while the proposed slug, planned publish date, and exactly one Primary
+Core Target make the queue schedulable and reviewable.
+
+The initial plan schedules one informational Post per day for 40 consecutive days.
+Every planned Post supports one distinct Core 40 page with a single natural contextual
+link. A task may be assigned only after the VA provides a research and draft brief that
+does not add pricing, testing, feature, or product claims without current primary-source
+evidence. The plan is a controlled backlog, not authorization to publish.
 
 ## Status definitions
 
