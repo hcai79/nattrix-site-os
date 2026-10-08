@@ -16,6 +16,9 @@ define( 'NATTRIX_PORTFOLIO_ENGINE_DIR', plugin_dir_path( __FILE__ ) );
 
 require_once NATTRIX_PORTFOLIO_ENGINE_DIR . 'includes/class-plugin.php';
 
+register_activation_hook( NATTRIX_PORTFOLIO_ENGINE_FILE, array( '\\Nattrix\\PortfolioEngine\\Plugin', 'activate' ) );
+register_deactivation_hook( NATTRIX_PORTFOLIO_ENGINE_FILE, array( '\\Nattrix\\PortfolioEngine\\Plugin', 'deactivate' ) );
+
 add_action(
     'plugins_loaded',
     static function () {
