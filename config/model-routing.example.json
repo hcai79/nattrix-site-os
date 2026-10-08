@@ -1,0 +1,80 @@
+{
+  "version": 1,
+  "note": "Example routing policy. Replace placeholder model IDs after querying OpenRouter models and benchmarking. Never commit secrets.",
+  "monthly_usd_cap_per_site": 50,
+  "daily_usd_cap_global": 20,
+  "per_article_usd_cap": 2,
+  "max_retries": 1,
+  "task_tiers": {
+    "classification": {
+      "tier": "economy",
+      "required_capabilities": [
+        "text"
+      ],
+      "human_approval": false
+    },
+    "clustering": {
+      "tier": "economy",
+      "required_capabilities": [
+        "structured_output"
+      ],
+      "human_approval": false
+    },
+    "competitor_analysis": {
+      "tier": "mid",
+      "required_capabilities": [
+        "text"
+      ],
+      "human_approval": true
+    },
+    "research_extraction": {
+      "tier": "economy",
+      "required_capabilities": [
+        "structured_output"
+      ],
+      "human_approval": false
+    },
+    "support_draft": {
+      "tier": "mid",
+      "required_capabilities": [
+        "text"
+      ],
+      "human_approval": true
+    },
+    "core_commercial_draft": {
+      "tier": "strong",
+      "required_capabilities": [
+        "text"
+      ],
+      "human_approval": true
+    },
+    "fact_qa": {
+      "tier": "strong",
+      "required_capabilities": [
+        "text"
+      ],
+      "human_approval": true
+    },
+    "alt_text": {
+      "tier": "economy",
+      "required_capabilities": [
+        "text"
+      ],
+      "human_approval": false
+    },
+    "image_generation": {
+      "tier": "image",
+      "required_capabilities": [
+        "image_output"
+      ],
+      "human_approval": true
+    }
+  },
+  "allowed_models_by_tier": {
+    "economy": [],
+    "mid": [],
+    "strong": [],
+    "image": []
+  },
+  "model_selection_rule": "cheapest_qualified_by_observed_cost_per_accepted_result"
+}
