@@ -20,6 +20,18 @@ Nine broken paths have either an exact existing destination or a strong candidat
 
 Candidate mappings have label differences from their target titles and need an intent check before replacement.
 
+## Redirect defect found in Core audit
+
+The first five Core category pages were checked with the bounded internal-link audit.
+The Best AI Caption Generators page links to `/tools/captions-ai-review/`. The public
+endpoint returns a Rank Math 301 to `/tools/captions-ai-review-2`, which in turn
+renders a 404. WordPress search still reports the intended Captions AI Review page
+as ID 820 with the original URL, so there is no verified replacement destination for
+the source link.
+
+Do not change the source link to the redirect target. The redirect or the intended
+page URL needs an owner-approved production diagnosis before any repair.
+
 ## Content or navigation gaps
 
 These paths have no sufficiently relevant published page found in the read-only search. Do not redirect them to a generic hub merely to remove a 404.

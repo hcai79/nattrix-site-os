@@ -30,6 +30,7 @@ if (-not $inventory -or -not ($inventory[0].PSObject.Properties.Name -contains '
 
 $pages = $inventory | Select-Object -First $MaxPages
 $links = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+$linkSources = @{}
 
 foreach ($page in $pages) {
     if ([string]::IsNullOrWhiteSpace($page.url)) {
@@ -38,7 +39,7 @@ foreach ($page in $pages) {
 
     try {
         $response = Invoke-WebRequest -Uri $page.url -UseBasicParsing -ErrorAction Stop
-        foreach ($match in [regex]::Matches($response.Content, '(?i)href\s*=\s*["'']([^"'']+)["'']')) {
+        foreach ($match in [regex]::Matches($response.Content, '(?i)<a\b[^>]*?\bhref\s*=\s*["'']([^"'']+)["'']')) {
             $href = [System.Net.WebUtility]::HtmlDecode($match.Groups[1].Value)
             if ($href.StartsWith('#') -or $href.StartsWith('mailto:') -or $href.StartsWith('tel:')) {
                 continue
@@ -47,7 +48,12 @@ foreach ($page in $pages) {
             try {
                 $target = [Uri]::new([Uri]$page.url, $href)
                 if ($target.Host -eq $siteBase.Host -and $target.Scheme -eq 'https') {
-                    $null = $links.Add($target.GetLeftPart([UriPartial]::Path).TrimEnd('/') + '/')
+                    $normalizedTarget = $target.GetLeftPart([UriPartial]::Path).TrimEnd('/') + '/'
+                    $null = $links.Add($normalizedTarget)
+                    if (-not $linkSources.ContainsKey($normalizedTarget)) {
+                        $linkSources[$normalizedTarget] = [System.Collections.Generic.HashSet[string]]::new([System.StringComparer]::OrdinalIgnoreCase)
+                    }
+                    $null = $linkSources[$normalizedTarget].Add($page.url)
                 }
             } catch {
                 Write-Warning "Skipped malformed href '$href' found on $($page.url)."
@@ -67,6 +73,7 @@ $results = foreach ($link in $links | Sort-Object) {
         $response = Invoke-WebRequest -Uri $link -MaximumRedirection 0 -UseBasicParsing -ErrorAction Stop
         [pscustomobject]@{
             source_scope = Split-Path -Leaf $InventoryPath
+            source_urls = ($linkSources[$link] | Sort-Object) -join ';'
             url = $link
             status_code = [int]$response.StatusCode
             result = 'ok'
@@ -75,6 +82,7 @@ $results = foreach ($link in $links | Sort-Object) {
         $status = if ($_.Exception.Response) { [int]$_.Exception.Response.StatusCode } else { $null }
         [pscustomobject]@{
             source_scope = Split-Path -Leaf $InventoryPath
+            source_urls = ($linkSources[$link] | Sort-Object) -join ';'
             url = $link
             status_code = $status
             result = $_.Exception.Message
