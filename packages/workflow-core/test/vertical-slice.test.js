@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows,
-  validateEvidencePack, calculateRiskBand
+  validateEvidencePack, calculateRiskBand, exportCsv, parseCsv
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -148,4 +148,11 @@ test('high-impact claims without citations are blocked and safety-sensitive work
   assert.deepEqual(calculateRiskBand({ commercial: 3, technical: 3, uncertainty: 2, visual: 3, change: 1 }), {
     total: 12, band: 'critical', requiredReview: 'owner_or_domain_expert'
   });
+});
+
+test('CSV export and import preserve values while rejecting malformed workbook input', () => {
+  const csv = exportCsv([{ stable_content_id: 'circuits-1', title: 'Guide, with comma', notes: 'A "quoted" note' }], ['stable_content_id', 'title', 'notes']);
+  assert.deepEqual(parseCsv(csv), [{ stable_content_id: 'circuits-1', title: 'Guide, with comma', notes: 'A "quoted" note' }]);
+  assert.throws(() => parseCsv('title,notes\n"unclosed,value'), /unclosed quoted cell/);
+  assert.throws(() => parseCsv('title,title\nA,B'), /duplicate headers/);
 });

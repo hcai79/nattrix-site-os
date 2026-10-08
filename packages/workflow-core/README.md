@@ -16,6 +16,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `validatePlanRows(rows, context)` validates editable workbook rows and produces a non-persisting collision and evidence preview.
 - `validateEvidencePack(pack)` blocks uncited high-impact claims and identifies human-review triggers.
 - `calculateRiskBand(dimensions)` maps documented risk dimensions to a required review depth.
+- `exportCsv(rows, columns)` and `parseCsv(csv)` enable a dependency-free, round-trip-safe CSV boundary before workbook file adapters are introduced.
 
 ## Security boundary
 

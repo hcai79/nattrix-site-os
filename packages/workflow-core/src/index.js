@@ -4,3 +4,4 @@ export { loadRoutingPolicy, selectMockRoute, BudgetLedger, MockOpenRouterProvide
 export { states, transition, retryFrom } from './state-machine.js';
 export { validatePlanRows } from './workbook.js';
 export { validateEvidencePack, calculateRiskBand } from './evidence.js';
+export { exportCsv, parseCsv } from './csv.js';
