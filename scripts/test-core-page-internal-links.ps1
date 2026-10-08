@@ -93,4 +93,3 @@ if ($outputDirectory -and -not (Test-Path -LiteralPath $outputDirectory)) {
 
 $results | Export-Csv -LiteralPath $OutputPath -NoTypeInformation
 Write-Host "Checked $($results.Count) unique internal URLs from $($pages.Count) source page(s). Results: $OutputPath"
-

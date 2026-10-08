@@ -25,4 +25,3 @@ is the intended live destination.
 - Never bulk-edit links from audit output.
 - Preserve URLs, canonicals, taxonomy paths, affiliate links, and navigation unless
   the owner explicitly authorizes the specific change.
-
