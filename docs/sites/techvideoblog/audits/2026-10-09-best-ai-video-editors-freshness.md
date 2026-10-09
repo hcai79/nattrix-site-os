@@ -49,6 +49,20 @@ No link repair is needed. Do not add links merely to increase their count; futur
 4. Separate official-source findings from any actual hands-on testing record.
 5. Route the resulting block-preserving draft through human approval before any commercial-page update.
 
+## Initial ledger sources
+
+The following vendor-owned starting sources were recorded in the Operations Hub on 2026-10-09. They establish where to verify a current claim. They do not approve a copy change, validate a historical price, or prove an editorial recommendation.
+
+- [CapCut pricing](https://article.capcut.com/pricing)
+- [VEED video editor](https://www.veed.io/tools/video-editor)
+- [Descript pricing](https://www.descript.com/price)
+- [Filmora purchase page](https://filmora.wondershare.com/shop/buy/buy-video-editor.html)
+- [Adobe video plan comparison](https://www.adobe.com/creativecloud/video/compare-plans.html)
+- [Kapwing pricing](https://www.kapwing.com/pricing)
+- [Canva pricing](https://www.canva.com/pricing/)
+
+The Filmora source remains marked `Need evidence` because a reviewer still needs to retain the currently displayed plan terms and regional billing context.
+
 ## Publishing guardrail
 
 This is a Core 40 commercial page. Any publication or major modification requires human approval. Keep its URL, canonical behavior, taxonomy, affiliate treatment, internal-link destinations, and visual design unchanged unless a separate approval explicitly covers a change.
