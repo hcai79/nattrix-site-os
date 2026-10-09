@@ -42,6 +42,10 @@ The retrieved page links to these first-priority destinations:
 
 Check the destination pages only after the source ledger is started. Do not change these links merely to add quantity.
 
+### Link check on 2026-10-09
+
+Ten of the eleven listed destinations returned HTTP 200. The exception is `/tools/captions-ai-review/`, which returned HTTP 404. This is the already documented Captions AI routing issue. Do not change the link or redirect without the owner decision recorded in the [Captions AI routing decision](2026-10-09-captions-ai-routing-decision.md). The C05 staging refresh remains blocked from link changes until that decision is resolved.
+
 ## Recommended VA output
 
 Create one Evidence Ledger row per high-impact claim, using the Operations Hub fields for content ID, source URL, source type, retrieval date, verification status, and update approval. Begin with the six tool-card pricing claims, then free-plan and watermark limits, then data-use and training claims. A claim that cannot be supported should be marked `Not retained` rather than guessed.
