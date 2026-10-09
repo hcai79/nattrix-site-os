@@ -10,6 +10,18 @@ Use this runbook only on a non-production WordPress clone. It is a release gate 
 4. Use a test administrator and a separate non-administrator editor account. Do not use an owner account or share credentials.
 5. Install the packaged plugin from the reviewed commit. Do not install an unreviewed build from a local working directory.
 
+## Reviewed staging package
+
+The current reviewed package is [`nattrix-portfolio-engine-v0.1.0-r5.zip`](../../dist/nattrix-portfolio-engine-v0.1.0-r5.zip), built from commit `3291a2cc2bfa85fa9cbba53d01964cb6bd9e82cb`.
+
+Before uploading it to staging, verify its SHA-256 hash is:
+
+```
+C77F8D022E66917FF0CEFFFC707D829244D3DC3C158289754439D4F375DFD7FD
+```
+
+If the hash differs, stop and obtain a newly reviewed package. Do not substitute a production plugin file or a local uncommitted build.
+
 ## Activation checks
 
 1. Activate **Nattrix Portfolio Engine** as an administrator.
