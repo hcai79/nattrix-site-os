@@ -27,14 +27,36 @@ export class BudgetLedger {
     return { allowed: true };
   }
 
-  record({ siteId, contentId, costUsd, taskType, model = 'deterministic-fixture' }) {
+  record({ siteId, contentId, costUsd, taskType, model = 'deterministic-fixture', provider = 'mock' }) {
     const allowed = this.canSpend({ siteId, contentId, estimatedUsd: costUsd });
     if (!allowed.allowed) throw new Error(`Budget blocked: ${allowed.reason}`);
     const now = new Date();
-    const entry = { siteId, contentId, costUsd, taskType, model, provider: 'mock', date: now.toISOString().slice(0, 10), month: now.toISOString().slice(0, 7), recorded_at: now.toISOString() };
+    const entry = { siteId, contentId, costUsd, taskType, model, provider, date: now.toISOString().slice(0, 10), month: now.toISOString().slice(0, 7), recorded_at: now.toISOString() };
     this.entries.push(entry);
     return entry;
   }
+}
+
+export function summarizeUsage(entries = []) {
+  if (!Array.isArray(entries)) throw new Error('Usage entries must be an array');
+  const groups = new Map();
+  let totalUsd = 0;
+  for (const entry of entries) {
+    if (!entry?.siteId || !entry?.taskType || !Number.isFinite(entry.costUsd) || entry.costUsd < 0) {
+      throw new Error('Usage entry needs siteId, taskType, and a non-negative costUsd');
+    }
+    const key = [entry.siteId, entry.taskType, entry.model ?? 'unknown', entry.provider ?? 'unknown'].join('|');
+    const group = groups.get(key) ?? { site_id: entry.siteId, task_type: entry.taskType, model: entry.model ?? 'unknown', provider: entry.provider ?? 'unknown', requests: 0, cost_usd: 0 };
+    group.requests += 1;
+    group.cost_usd += entry.costUsd;
+    groups.set(key, group);
+    totalUsd += entry.costUsd;
+  }
+  return {
+    total_requests: entries.length,
+    total_cost_usd: totalUsd,
+    by_route: [...groups.values()].sort((a, b) => b.cost_usd - a.cost_usd || a.site_id.localeCompare(b.site_id))
+  };
 }
 
 export class MockOpenRouterProvider {
@@ -61,7 +83,7 @@ export class OpenRouterProvider {
     if (!(budgetLedger instanceof BudgetLedger)) throw new Error('A BudgetLedger is required for live provider requests');
     const preflight = budgetLedger.canSpend({ siteId, contentId, estimatedUsd: estimatedCostUsd });
     if (!preflight.allowed) throw new Error(`Budget blocked: ${preflight.reason}`);
-    const reservation = budgetLedger.record({ siteId, contentId, costUsd: estimatedCostUsd, taskType, model });
+    const reservation = budgetLedger.record({ siteId, contentId, costUsd: estimatedCostUsd, taskType, model, provider: 'openrouter' });
     const response = await this.fetchImpl('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
       headers: {

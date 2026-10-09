@@ -9,6 +9,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `loadRoutingPolicy(policy)` validates a versioned routing-policy shape.
 - `selectMockRoute(policy, taskType)` returns the deterministic mock route used by tests.
 - `BudgetLedger` applies global daily, site monthly, and per-content cost caps before recording telemetry.
+- `summarizeUsage` creates a deterministic cost report grouped by site, task, model, and provider for reviewer and optimization decisions.
 - `MockOpenRouterProvider` returns injected fixtures only. It rejects live routing.
 - `OpenRouterProvider` is a server-only, explicitly enabled adapter. It enforces a supplied model allowlist and requires a `BudgetLedger` preflight before every request, but is not wired into the workflow until the registry and evaluation gate are complete.
 - `transition(job, nextState, options)` implements the documented workflow sequence and records approval gates.

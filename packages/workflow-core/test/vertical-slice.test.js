@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
-  BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows,
+  BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, summarizeUsage, transition, retryFrom, validatePlanRows,
   validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter,
   StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage
 } from '../src/index.js';
@@ -144,6 +144,17 @@ test('budget cap blocks further spend before it is recorded', () => {
   ledger.record({ siteId: 'circuits-at-home', contentId: 'support-1', costUsd: 0.5, taskType: 'support_draft' });
   assert.deepEqual(ledger.canSpend({ siteId: 'circuits-at-home', contentId: 'support-1', estimatedUsd: 0.01 }), { allowed: false, reason: 'article_cap' });
   assert.throws(() => ledger.record({ siteId: 'circuits-at-home', contentId: 'support-1', costUsd: 0.01, taskType: 'support_draft' }), /article_cap/);
+});
+
+test('usage summary groups spend by the route used', () => {
+  const summary = summarizeUsage([
+    { siteId: 'circuits-at-home', contentId: 'a', taskType: 'research', model: 'model-a', provider: 'mock', costUsd: 0 },
+    { siteId: 'circuits-at-home', contentId: 'b', taskType: 'research', model: 'model-a', provider: 'mock', costUsd: 0 },
+    { siteId: 'other-site', contentId: 'c', taskType: 'draft', model: 'model-b', provider: 'openrouter', costUsd: 0.12 }
+  ]);
+  assert.equal(summary.total_requests, 3);
+  assert.equal(summary.total_cost_usd, 0.12);
+  assert.deepEqual(summary.by_route[0], { site_id: 'other-site', task_type: 'draft', model: 'model-b', provider: 'openrouter', requests: 1, cost_usd: 0.12 });
 });
 
 test('workflow blocks gated state changes without approval and resumes from correction state', () => {
