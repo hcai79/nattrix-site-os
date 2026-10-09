@@ -5,22 +5,25 @@ Scope: read-only production inspection of five Core 40 category pillars. No prod
 
 ## Confirmed candidates
 
-| Priority | Page | ID | URL | Last modified | Why it is queued |
-| --- | --- | --- | --- | --- | --- |
-| P0 | Best AI Video Editors | 808 | `/tool-category/best-ai-video-editors/` | 2026-05-10 | Large commercial guide with 34,159 characters that needs current price, plan, and recommendation evidence. |
-| P0 | Best AI Video Generators | 809 | `/tool-category/best-ai-video-generators/` | 2026-05-10 | Large commercial guide with 36,393 characters, including fast-changing model and tool guidance. |
-| P0 | Best AI Avatar Tools | 688 | `/tool-category/best-ai-avatar-tools/` | 2026-05-10 | Commercial guide with 27,417 characters and policy-sensitive avatar claims. |
-| P0 | Best AI Caption Generators | 803 | `/tool-category/best-ai-caption-generators/` | 2026-05-10 | Commercial guide with 33,369 characters, pricing and workflow claims, and links to tool reviews. |
-| P0 | Best AI Subtitle Generators | 686 | `/tool-category/best-ai-subtitle-generators/` | 2026-05-10 | Commercial guide with 28,562 characters, which is likely to contain plan and language-support guidance. |
+| Priority | Page | ID | URL | Last modified | Audit status | Why it is queued |
+| --- | --- | --- | --- | --- | --- | --- |
+| P0 | Best AI Video Editors | 808 | `/tool-category/best-ai-video-editors/` | 2026-05-10 | [Audit complete](2026-10-09-best-ai-video-editors-freshness.md) | Large commercial guide with 34,159 characters that needs current price, plan, and recommendation evidence. |
+| P0 | Best AI Video Generators | 809 | `/tool-category/best-ai-video-generators/` | 2026-05-10 | [Audit complete](2026-10-09-best-ai-video-generators-freshness.md) | Large commercial guide with 36,393 characters, including fast-changing model and tool guidance. |
+| P0 | Best AI Avatar Tools | 688 | `/tool-category/best-ai-avatar-tools/` | 2026-05-10 | [Audit complete](2026-10-09-best-ai-avatar-tools-freshness.md) | Commercial guide with 27,417 characters and policy-sensitive avatar claims. |
+| P0 | Best AI Caption Generators | 803 | `/tool-category/best-ai-caption-generators/` | 2026-05-10 | [Audit complete, route blocked](2026-10-09-best-ai-caption-generators-freshness.md) | Commercial guide with 33,369 characters, pricing and workflow claims, and links to tool reviews. |
+| P0 | Best AI Subtitle Generators | 686 | `/tool-category/best-ai-subtitle-generators/` | 2026-05-10 | [Audit complete, route blocked](2026-10-09-best-ai-subtitle-generators-freshness.md) | Commercial guide with 28,562 characters, which is likely to contain plan and language-support guidance. |
 
 All five URLs resolved to existing published WordPress Pages during the inspection. The character counts are an audit-triage signal, not a quality score.
 
 ## Recommended order
 
-1. Best AI Video Editors and Best AI Caption Generators because they connect to multiple established tool reviews and buying decisions.
-2. Best AI Video Generators because product capabilities can change particularly quickly.
-3. Best AI Avatar Tools because privacy, consent, training, and localization statements need primary sources.
-4. Best AI Subtitle Generators after the shared caption and translation evidence is available.
+The first-pass audits are complete. Next, build the source ledger and staging briefs in this order:
+
+1. Best AI Video Editors because it now has initial official-source records in the Operations Hub and connects to established reviews.
+2. Best AI Caption Generators, after the Captions AI routing decision is made.
+3. Best AI Video Generators because product capability and model claims change particularly quickly.
+4. Best AI Avatar Tools because privacy, consent, training, and localization statements need primary sources.
+5. Best AI Subtitle Generators, after the Captions AI routing decision and shared subtitle evidence are available.
 
 ## Repeatable review method
 
