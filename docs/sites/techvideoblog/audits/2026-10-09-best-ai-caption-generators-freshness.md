@@ -54,6 +54,8 @@ The following first-party starting sources were recorded in the Operations Hub o
 - [Captions plans](https://www.captions.ai/plans)
 - [Kapwing pricing](https://www.kapwing.com/pricing)
 - [VEED video editor and plan guidance](https://www.veed.io/tools/video-editor)
+- [Maestra pricing](https://maestra.ai/pricing?type=real-time)
+- [Descript pricing](https://www.descript.com/price)
 
 ## Publishing guardrail
 
