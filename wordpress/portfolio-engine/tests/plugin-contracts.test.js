@@ -51,4 +51,6 @@ test('Portfolio Engine manages centralized Affiliate Offer records through a pro
   assert.match(source, /wp_verify_nonce\( \$nonce, 'nattrix_save_affiliate_offers' \)/);
   assert.match(source, /sanitize_offers\( wp_unslash\( \$offers \) \)/);
   assert.match(source, /current_user_can\( 'edit_post', \$post_id \)/);
+  assert.match(source, /array_filter\( \$offers, 'is_array' \)/);
+  assert.match(source, /is_scalar\( \$value \)/);
 });
