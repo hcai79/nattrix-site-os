@@ -46,6 +46,14 @@ Check the destination pages only after the source ledger is started. Do not chan
 
 Create one Evidence Ledger row per high-impact claim, using the Operations Hub fields for content ID, source URL, source type, retrieval date, verification status, and update approval. Begin with the six tool-card pricing claims, then free-plan and watermark limits, then data-use and training claims. A claim that cannot be supported should be marked `Not retained` rather than guessed.
 
+## Initial ledger entries
+
+The following first-party starting sources were recorded in the Operations Hub on 2026-10-09. They establish where to verify current vendor claims; they do not approve a copy change or validate a historical price statement by themselves.
+
+- [Submagic pricing](https://www.submagic.co/pricing)
+- [Captions plans](https://www.captions.ai/plans)
+- [Kapwing pricing](https://www.kapwing.com/pricing)
+
 ## Publishing guardrail
 
 Prepare a block-preserving staging draft only when the required claims are sourced and a human reviewer has approved the scoped update. Keep the page's existing URL, canonical behavior, affiliate treatment, internal-link destinations, and visual design unchanged unless a separate approval explicitly covers a change.
