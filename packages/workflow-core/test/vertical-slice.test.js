@@ -87,7 +87,7 @@ test('draft package QA combines Gutenberg, claim evidence, and media gates befor
       sections: [{ heading: 'Choose safely', body: 'Match the meter to the task.' }]
     },
     evidencePack: {
-      claims: [{ text: 'The product supports a stated range.', class: 'verified_fact', impact: 'medium', confidence: 90, source_url: 'https://example.com/spec', source_type: 'manufacturer', checked_at: '2026-10-09T00:00:00Z' }]
+      claims: [{ text: 'The product supports a stated range.', class: 'verified_fact', impact: 'medium', confidence: 90, source_url: 'https://example.com/spec', source_type: 'manufacturer', checked_at: '2026-10-09T00:00:00Z', notes: 'Specification recorded from the manufacturer source.' }]
     },
     mediaManifest: { assets: [{ asset_id: 'photo-1', type: 'article_image', origin: 'licensed', rights_note: 'Licensed for the article.', alt_text: 'A digital multimeter.' }] }
   });
@@ -97,7 +97,7 @@ test('draft package QA combines Gutenberg, claim evidence, and media gates befor
 
   const blocked = validateDraftPackage({
     draft: { stable_content_id: 'circuits-2', review_tier: 'deep', title: 'Electrical guide', summary: 'Summary.', sections: [{ heading: 'Safety', body: 'Use a professional.' }] },
-    evidencePack: { claims: [{ text: 'Uncited safety claim.', class: 'verified_fact', impact: 'high', confidence: 90, source_url: '', source_type: 'unknown', checked_at: '2026-10-09T00:00:00Z' }] },
+    evidencePack: { claims: [{ text: 'Uncited safety claim.', class: 'verified_fact', impact: 'high', confidence: 90, source_url: '', source_type: 'unknown', checked_at: '2026-10-09T00:00:00Z', notes: 'Source lookup did not produce a valid citation.' }] },
     mediaManifest: { assets: [] }
   });
   assert.equal(blocked.readyForHumanReview, false);
@@ -253,7 +253,7 @@ test('high-impact claims without citations are blocked and safety-sensitive work
     checkedAt: '2026-10-08',
     claims: [{
       text: 'This meter has a CAT III rating.', class: 'verified_fact', impact: 'high',
-      confidence: 95, source_type: 'manufacturer_manual', checked_at: '2026-10-08'
+      confidence: 95, source_type: 'manufacturer_manual', checked_at: '2026-10-08', notes: 'Manual section must be retained before publication.'
     }]
   });
   assert.equal(evidence.publishable, false);
@@ -261,6 +261,17 @@ test('high-impact claims without citations are blocked and safety-sensitive work
   assert.deepEqual(calculateRiskBand({ commercial: 3, technical: 3, uncertainty: 2, visual: 3, change: 1 }), {
     total: 12, band: 'critical', requiredReview: 'owner_or_domain_expert'
   });
+});
+
+test('evidence packs require contextual notes for every factual claim', () => {
+  const result = validateEvidencePack({
+    claims: [{
+      text: 'A plan includes a stated feature.', class: 'manufacturer_claim', impact: 'medium', confidence: 90,
+      source_url: 'https://example.com/pricing', source_type: 'first_party', checked_at: '2026-10-09T00:00:00Z'
+    }]
+  });
+  assert.equal(result.valid, false);
+  assert.ok(result.errors.some((error) => error.code === 'notes_missing'));
 });
 
 test('CSV export and import preserve values while rejecting malformed workbook input', () => {

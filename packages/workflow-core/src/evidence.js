@@ -23,6 +23,7 @@ export function validateEvidencePack({ claims = [], checkedAt = new Date().toISO
     if (!claim.source_url || !isHttpUrl(claim.source_url)) errors.push({ claim: item, code: 'citation_missing_or_invalid' });
     if (!claim.source_type) errors.push({ claim: item, code: 'source_type_missing' });
     if (!claim.checked_at || Number.isNaN(Date.parse(claim.checked_at))) errors.push({ claim: item, code: 'checked_date_missing_or_invalid' });
+    if (!String(claim.notes ?? '').trim()) errors.push({ claim: item, code: 'notes_missing' });
 
     if (claim.impact === 'high' && (!claim.source_url || !isHttpUrl(claim.source_url))) reviewTriggers.push({ claim: item, reason: 'high_impact_claim_missing_citation', blocking: true });
     if ((claim.confidence ?? 0) < 80) reviewTriggers.push({ claim: item, reason: 'confidence_below_80', blocking: false });
