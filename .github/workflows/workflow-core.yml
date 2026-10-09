@@ -25,3 +25,15 @@ jobs:
         run: |
           php --version
           find wordpress/portfolio-engine -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: Reject tracked credentials
+        run: |
+          tracked_env_files="$(git ls-files | grep -E '(^|/)\.env($|\.)' | grep -v '^\.env\.example$' || true)"
+          if [ -n "$tracked_env_files" ]; then
+            echo "Tracked environment files are not allowed:"
+            echo "$tracked_env_files"
+            exit 1
+          fi
+          if git grep -nE '(sk-or-v1-|sk-proj-)[A-Za-z0-9_-]{10,}' -- ':!*.md'; then
+            echo "Possible provider credential found in tracked source."
+            exit 1
+          fi
