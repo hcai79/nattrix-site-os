@@ -5,7 +5,7 @@ import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows,
   validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter,
-  StagingWordPressAdapter, renderGutenbergDraft
+  StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -59,6 +59,30 @@ test('staging adapter rejects production and only creates explicit staging draft
   assert.equal(requests.length, 1);
   assert.match(requests[0].url, /staging\.example\.com\/wp-json\/wp\/v2\/posts/);
   assert.equal(JSON.parse(requests[0].options.body).status, 'draft');
+});
+
+test('draft package QA combines Gutenberg, claim evidence, and media gates before human review', () => {
+  const result = validateDraftPackage({
+    draft: {
+      stable_content_id: 'circuits-1', review_tier: 'standard', title: 'Multimeter guide', summary: 'A source-backed guide.',
+      sections: [{ heading: 'Choose safely', body: 'Match the meter to the task.' }]
+    },
+    evidencePack: {
+      claims: [{ text: 'The product supports a stated range.', class: 'verified_fact', impact: 'medium', confidence: 90, source_url: 'https://example.com/spec', source_type: 'manufacturer', checked_at: '2026-10-09T00:00:00Z' }]
+    },
+    mediaManifest: { assets: [{ asset_id: 'photo-1', type: 'article_image', origin: 'licensed', rights_note: 'Licensed for the article.', alt_text: 'A digital multimeter.' }] }
+  });
+  assert.equal(result.valid, true);
+  assert.equal(result.readyForHumanReview, true);
+  assert.match(result.blocks, /Multimeter guide/);
+
+  const blocked = validateDraftPackage({
+    draft: { stable_content_id: 'circuits-2', review_tier: 'deep', title: 'Electrical guide', summary: 'Summary.', sections: [{ heading: 'Safety', body: 'Use a professional.' }] },
+    evidencePack: { claims: [{ text: 'Uncited safety claim.', class: 'verified_fact', impact: 'high', confidence: 90, source_url: '', source_type: 'unknown', checked_at: '2026-10-09T00:00:00Z' }] },
+    mediaManifest: { assets: [] }
+  });
+  assert.equal(blocked.readyForHumanReview, false);
+  assert.ok(blocked.errors.some((error) => error.code === 'citation_missing_or_invalid'));
 });
 
 test('inventory normalizes same-domain URLs and rejects canonical collisions', () => {
