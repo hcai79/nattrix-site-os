@@ -10,3 +10,4 @@ export { validateMediaManifest } from './media.js';
 export { MockSiteAdapter, StagingWordPressAdapter } from './site-adapter.js';
 export { renderGutenbergDraft } from './gutenberg.js';
 export { validateDraftPackage } from './draft-qa.js';
+export { createApprovalDecision, isApprovedForContent } from './approvals.js';

@@ -1,4 +1,5 @@
 import { transition, retryFrom } from './state-machine.js';
+import { isApprovedForContent } from './approvals.js';
 
 export class BatchRunner {
   constructor({ batchId, siteId, maxItems = 5 }) {
@@ -32,10 +33,14 @@ export class BatchRunner {
   advance(contentId, nextState, options) {
     const job = this.jobs.get(contentId);
     if (!job) throw new Error(`Unknown content item: ${contentId}`);
-    const { qualityGate, ...transitionOptions } = options ?? {};
+    const { qualityGate, approvalDecision, ...transitionOptions } = options ?? {};
     if (nextState === 'qa_passed' && qualityGate?.readyForHumanReview !== true) {
       throw new Error('qa_passed requires a successful draft quality gate');
     }
+    if (['approved', 'scheduled'].includes(nextState) && !isApprovedForContent(approvalDecision, contentId)) {
+      throw new Error(`${nextState} requires a recorded approval decision for this content item`);
+    }
+    if (['approved', 'scheduled'].includes(nextState)) transitionOptions.approval = true;
     const updated = transition(job, nextState, transitionOptions);
     this.jobs.set(contentId, updated);
     return updated;

@@ -5,7 +5,7 @@ import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, summarizeUsage, transition, retryFrom, validatePlanRows,
   validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter,
-  StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage
+  StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage, createApprovalDecision
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -264,6 +264,23 @@ test('batch runner requires a successful quality gate before QA can pass', () =>
   assert.throws(() => runner.advance('circuits-qa-1', 'qa_passed', { actor: 'qa-worker', qualityGate: { readyForHumanReview: false } }), /quality gate/);
   const job = runner.advance('circuits-qa-1', 'qa_passed', { actor: 'qa-worker', qualityGate: { readyForHumanReview: true } });
   assert.equal(job.state, 'qa_passed');
+});
+
+test('batch runner requires a structured human decision before approval or scheduling', () => {
+  const runner = new BatchRunner({ batchId: 'circuits-batch-approval', siteId: 'circuits-at-home' });
+  runner.enqueue([{ stable_content_id: 'circuits-approval-1', site_id: 'circuits-at-home' }], { actor: 'owner' });
+  for (const state of ['researching', 'drafted', 'visuals_ready']) runner.advance('circuits-approval-1', state, { actor: 'worker' });
+  runner.advance('circuits-approval-1', 'qa_passed', { actor: 'qa-worker', qualityGate: { readyForHumanReview: true } });
+  runner.advance('circuits-approval-1', 'human_review', { actor: 'reviewer' });
+  assert.throws(() => runner.advance('circuits-approval-1', 'approved', { actor: 'reviewer', approval: true }), /recorded approval decision/);
+  const decision = createApprovalDecision({ contentId: 'circuits-approval-1', actor: 'reviewer', decision: 'approved', decidedAt: '2026-10-09T00:00:00Z' });
+  const approved = runner.advance('circuits-approval-1', 'approved', { actor: 'reviewer', approvalDecision: decision });
+  assert.equal(approved.state, 'approved');
+  const staged = runner.advance('circuits-approval-1', 'staged', { actor: 'staging-worker' });
+  const scheduled = runner.advance('circuits-approval-1', 'scheduled', { actor: 'reviewer', approvalDecision: decision });
+  assert.equal(staged.state, 'staged');
+  assert.equal(scheduled.state, 'scheduled');
+  assert.throws(() => createApprovalDecision({ contentId: 'circuits-approval-1', actor: 'reviewer', decision: 'returned' }), /requires a reason/);
 });
 
 test('media manifest blocks generated exact product imagery and queues technical graphics for review', () => {
