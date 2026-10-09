@@ -61,6 +61,24 @@ test('staging adapter rejects production and only creates explicit staging draft
   assert.equal(JSON.parse(requests[0].options.body).status, 'draft');
 });
 
+test('staging adapter schedules only approved drafts with an explicit staging opt-in', async () => {
+  const requests = [];
+  const adapter = new StagingWordPressAdapter({
+    baseUrl: 'https://staging.example.com', siteId: 'site-a', environment: 'staging',
+    fetchImpl: async (url, options) => {
+      requests.push({ url: url.toString(), options });
+      return { ok: true, json: async () => ({ id: 55, status: 'future', link: 'https://staging.example.com/?p=55' }) };
+    }
+  });
+  const approval = createApprovalDecision({ contentId: 'support-1', actor: 'reviewer', decision: 'approved', decidedAt: '2026-10-09T00:00:00Z' });
+  await assert.rejects(() => adapter.scheduleDraft({ contentId: 'support-1', postId: 55, scheduledFor: '2027-01-01T00:00:00Z', approvalDecision: approval, idempotencyKey: 'schedule-1', authorization: 'Basic runtime-only' }), /explicit allowStagingWrites/);
+  const result = await adapter.scheduleDraft({ contentId: 'support-1', postId: 55, scheduledFor: '2027-01-01T00:00:00Z', approvalDecision: approval, idempotencyKey: 'schedule-1', authorization: 'Basic runtime-only', allowStagingWrites: true });
+  assert.equal(result.status, 'future');
+  assert.equal(requests.length, 1);
+  assert.match(requests[0].url, /posts\/55/);
+  assert.deepEqual(JSON.parse(requests[0].options.body), { status: 'future', date: '2027-01-01T00:00:00.000Z' });
+});
+
 test('draft package QA combines Gutenberg, claim evidence, and media gates before human review', () => {
   const result = validateDraftPackage({
     draft: {

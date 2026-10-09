@@ -22,7 +22,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `validateMediaManifest(manifest)` records media provenance, rejects generated exact-product imagery, and identifies visuals requiring human review.
 - `MockSiteAdapter` provides a deterministic, read-only site inventory fixture and rejects any draft creation call.
 - `renderGutenbergDraft` turns a validated structured draft into basic Gutenberg blocks without injecting affiliate URLs.
-- `StagingWordPressAdapter` can create a WordPress **draft only** after an explicit staging-only write opt-in. It does not store credentials and rejects production or unspecified environments. A durable idempotency store must be supplied by a real worker deployment.
+- `StagingWordPressAdapter` can create WordPress drafts, or schedule an existing draft after a recorded human approval, only after an explicit staging-only write opt-in. It does not store credentials and rejects production or unspecified environments. A durable idempotency store must be supplied by a real worker deployment.
 - `validateDraftPackage` runs the Gutenberg, evidence, and media gates together and prepares an item for human review. It never approves or publishes content.
 - `BatchRunner` requires a successful `validateDraftPackage` result before a job can enter `qa_passed`; human approval remains separately required for later gated states.
 - `createApprovalDecision` records a structured human approve-or-return decision. `BatchRunner` requires that record before an item can enter `approved` or `scheduled`.
