@@ -46,6 +46,20 @@ Check for unsupported testing, pricing, performance, or hands-on claims; stale d
 - Post `1286`, *Best Video Editor Auto Captions*, is an editorial-refresh candidate. The prior read-only audit found a missing first FAQ answer, an empty opening paragraph, and claim evidence gaps.
 - Post `1292`, *Video Stabilization AI*, is escalated. A prior read-only audit found an outbound link labeled as a TechVideoBlog directory that instead led to an unrelated third-party site. Do not change it until the intended destination is confirmed.
 
+## Newest high-risk claim cues
+
+A read-only inventory on 2026-10-09 identified recent posts whose published titles or excerpts contain quantified, pricing, policy, or testing language. This is a prioritization cue, not a finding that any claim is false.
+
+| Post | URL | Cue that needs evidence review |
+| --- | --- | --- |
+| `1489` YouTube Creators: 7 Factors to Score Video Idea Generator Output | `/video-idea-generator/` | `tested 7 factor scoring rubric` |
+| `1485` Rev Subtitles Review 2026: Workflow Fit Before You Buy | `/rev-review/` | `2026 per-minute pricing` and ordering-flow guidance |
+| `1482` Save 80% of Roto Time: AI Rotoscoping Workflow Tested for Creators | `/ai-rotoscoping/` | `Save 80%` and `tested` performance language |
+| `1478` Creators: Avoid the $1 million License Pitfall, Stable Diffusion vs Midjourney | `/stable-diffusion-vs-midjourney/` | licensing threshold and pricing or policy interpretation |
+| `1477` D-ID Pricing and Policy Checked: A 2026 Buyer Review | `/d-id-review/` | current pricing, policy, company-update, and research-backed claims |
+
+Audit these individually before modifying any of the pages. Start with the two commercial reviews, then the quantified performance and licensing claims.
+
 ## Order of work
 
 1. Audit commercial and comparison intent first.
