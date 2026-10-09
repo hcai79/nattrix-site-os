@@ -16,6 +16,17 @@
 - The article links to relevant YouTube, category, use-case, directory, and methodology destinations.
 - The article preserves the existing URL, default canonical behavior, category, tag, author, and media.
 
+## Internal-link verification
+
+The following linked TechVideoBlog destinations returned HTTP 200 on 2026-10-09:
+
+- `/tool-category/ai-video-generators/`
+- `/use-cases/best-ai-tools-for-youtube-shorts/`
+- `/platforms/best-ai-tools-for-youtube/`
+- `/short-form-trends/`
+
+No link repair is proposed for these destinations.
+
 ## Evidence and trust risks
 
 | Priority | Finding | Why it needs review | Safe next action |
