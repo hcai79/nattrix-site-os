@@ -4,7 +4,8 @@ import { readFile } from 'node:fs/promises';
 import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, transition, retryFrom, validatePlanRows,
-  validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter
+  validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter,
+  StagingWordPressAdapter, renderGutenbergDraft
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -23,6 +24,41 @@ test('mock site adapter uses fixtures for read-only inventory and rejects writes
   assert.equal((await adapter.listUrlInventory())[0].canonical_url, 'https://circuitsathome.com/multimeter-buying-guide');
   assert.deepEqual(await adapter.listCategories(), [{ slug: 'test-equipment' }]);
   await assert.rejects(adapter.createDraft(), /read-only/);
+});
+
+test('Gutenberg renderer creates escaped blocks and only permits cited HTTP(S) sources', () => {
+  const content = renderGutenbergDraft({
+    title: 'A <safe> draft',
+    summary: 'A grounded summary.',
+    sections: [{ heading: 'What to know', body: 'Use evidence first.' }],
+    sources: [{ label: 'Official source', url: 'https://example.com/docs' }]
+  });
+  assert.match(content, /<!-- wp:heading/);
+  assert.match(content, /A &lt;safe&gt; draft/);
+  assert.match(content, /rel="nofollow noopener"/);
+  assert.throws(() => renderGutenbergDraft({ title: 'X', summary: 'Y', sections: [{ heading: 'H', body: 'B' }], sources: [{ label: 'Bad', url: 'javascript:alert(1)' }] }), /HTTP\(S\)/);
+});
+
+test('staging adapter rejects production and only creates explicit staging drafts', async () => {
+  assert.throws(() => new StagingWordPressAdapter({ baseUrl: 'https://example.com', siteId: 'site-a', environment: 'production' }), /staging environment/);
+  const requests = [];
+  const adapter = new StagingWordPressAdapter({
+    baseUrl: 'https://staging.example.com',
+    siteId: 'site-a',
+    environment: 'staging',
+    fetchImpl: async (url, options) => {
+      requests.push({ url: url.toString(), options });
+      return { ok: true, json: async () => ({ id: 55, status: 'draft', link: 'https://staging.example.com/?p=55' }) };
+    }
+  });
+  await assert.rejects(() => adapter.createDraft({ contentId: 'support-1', title: 'Draft', content: 'Body', idempotencyKey: 'key-1', authorization: 'Basic runtime-only' }), /explicit allowStagingWrites/);
+  const result = await adapter.createDraft({ contentId: 'support-1', title: 'Draft', content: 'Body', idempotencyKey: 'key-1', authorization: 'Basic runtime-only', allowStagingWrites: true });
+  assert.equal(result.status, 'draft');
+  const duplicate = await adapter.createDraft({ contentId: 'support-1', title: 'Changed title', content: 'Changed body', idempotencyKey: 'key-1', authorization: 'Basic runtime-only', allowStagingWrites: true });
+  assert.equal(duplicate.id, result.id);
+  assert.equal(requests.length, 1);
+  assert.match(requests[0].url, /staging\.example\.com\/wp-json\/wp\/v2\/posts/);
+  assert.equal(JSON.parse(requests[0].options.body).status, 'draft');
 });
 
 test('inventory normalizes same-domain URLs and rejects canonical collisions', () => {

@@ -20,6 +20,8 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `BatchRunner` queues no more than five unique items, preserves job identity, and supports auditable correction/resume behavior without publishing.
 - `validateMediaManifest(manifest)` records media provenance, rejects generated exact-product imagery, and identifies visuals requiring human review.
 - `MockSiteAdapter` provides a deterministic, read-only site inventory fixture and rejects any draft creation call.
+- `renderGutenbergDraft` turns a validated structured draft into basic Gutenberg blocks without injecting affiliate URLs.
+- `StagingWordPressAdapter` can create a WordPress **draft only** after an explicit staging-only write opt-in. It does not store credentials and rejects production or unspecified environments. A durable idempotency store must be supplied by a real worker deployment.
 
 ## Security boundary
 
