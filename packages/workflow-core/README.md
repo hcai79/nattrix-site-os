@@ -23,6 +23,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `renderGutenbergDraft` turns a validated structured draft into basic Gutenberg blocks without injecting affiliate URLs.
 - `StagingWordPressAdapter` can create a WordPress **draft only** after an explicit staging-only write opt-in. It does not store credentials and rejects production or unspecified environments. A durable idempotency store must be supplied by a real worker deployment.
 - `validateDraftPackage` runs the Gutenberg, evidence, and media gates together and prepares an item for human review. It never approves or publishes content.
+- `BatchRunner` requires a successful `validateDraftPackage` result before a job can enter `qa_passed`; human approval remains separately required for later gated states.
 
 ## Security boundary
 

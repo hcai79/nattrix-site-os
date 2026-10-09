@@ -244,6 +244,17 @@ test('five-item batch runner is idempotent and resumes corrected work without du
   assert.equal(runner.snapshot().filter((item) => item.id === 'circuits-1').length, 1);
 });
 
+test('batch runner requires a successful quality gate before QA can pass', () => {
+  const runner = new BatchRunner({ batchId: 'circuits-batch-qa', siteId: 'circuits-at-home' });
+  runner.enqueue([{ stable_content_id: 'circuits-qa-1', site_id: 'circuits-at-home' }], { actor: 'owner' });
+  runner.advance('circuits-qa-1', 'researching', { actor: 'research-worker' });
+  runner.advance('circuits-qa-1', 'drafted', { actor: 'writer-worker' });
+  runner.advance('circuits-qa-1', 'visuals_ready', { actor: 'media-worker' });
+  assert.throws(() => runner.advance('circuits-qa-1', 'qa_passed', { actor: 'qa-worker', qualityGate: { readyForHumanReview: false } }), /quality gate/);
+  const job = runner.advance('circuits-qa-1', 'qa_passed', { actor: 'qa-worker', qualityGate: { readyForHumanReview: true } });
+  assert.equal(job.state, 'qa_passed');
+});
+
 test('media manifest blocks generated exact product imagery and queues technical graphics for review', () => {
   const manifest = validateMediaManifest({
     content_id: 'circuits-1',

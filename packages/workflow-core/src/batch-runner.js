@@ -32,7 +32,11 @@ export class BatchRunner {
   advance(contentId, nextState, options) {
     const job = this.jobs.get(contentId);
     if (!job) throw new Error(`Unknown content item: ${contentId}`);
-    const updated = transition(job, nextState, options);
+    const { qualityGate, ...transitionOptions } = options ?? {};
+    if (nextState === 'qa_passed' && qualityGate?.readyForHumanReview !== true) {
+      throw new Error('qa_passed requires a successful draft quality gate');
+    }
+    const updated = transition(job, nextState, transitionOptions);
     this.jobs.set(contentId, updated);
     return updated;
   }
