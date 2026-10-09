@@ -38,22 +38,22 @@ final class Meta_Models {
             if ( ! is_array( $offer ) ) {
                 continue;
             }
-            $offer_id = sanitize_key( $offer['offer_id'] ?? '' );
-            $status = sanitize_key( $offer['status'] ?? 'inactive' );
+            $offer_id = sanitize_key( $this->string_value( $offer['offer_id'] ?? '' ) );
+            $status = sanitize_key( $this->string_value( $offer['status'] ?? 'inactive' ) );
             if ( '' === $offer_id || isset( $seen_ids[ $offer_id ] ) || ! in_array( $status, self::OFFER_STATUSES, true ) ) {
                 continue;
             }
-            $destination_url = $this->sanitize_offer_url( $offer['destination_url'] ?? '' );
+            $destination_url = $this->sanitize_offer_url( $this->string_value( $offer['destination_url'] ?? '' ) );
             if ( '' === $destination_url ) {
                 continue;
             }
             $seen_ids[ $offer_id ] = true;
             $sanitized[] = array(
                 'offer_id' => $offer_id,
-                'merchant_name' => sanitize_text_field( $offer['merchant_name'] ?? '' ),
+                'merchant_name' => sanitize_text_field( $this->string_value( $offer['merchant_name'] ?? '' ) ),
                 'destination_url' => $destination_url,
-                'affiliate_url' => $this->sanitize_offer_url( $offer['affiliate_url'] ?? '' ),
-                'disclosure_label' => sanitize_text_field( $offer['disclosure_label'] ?? '' ),
+                'affiliate_url' => $this->sanitize_offer_url( $this->string_value( $offer['affiliate_url'] ?? '' ) ),
+                'disclosure_label' => sanitize_text_field( $this->string_value( $offer['disclosure_label'] ?? '' ) ),
                 'status' => $status,
             );
         }
@@ -86,6 +86,10 @@ final class Meta_Models {
         $url = esc_url_raw( $value );
         $scheme = wp_parse_url( $url, PHP_URL_SCHEME );
         return in_array( $scheme, array( 'https', 'http' ), true ) ? $url : '';
+    }
+
+    private function string_value( $value ): string {
+        return is_scalar( $value ) ? (string) $value : '';
     }
 
     private function register_core_page_meta( string $post_type ): void {

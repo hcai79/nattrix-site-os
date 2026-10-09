@@ -42,3 +42,13 @@ test('Portfolio Engine Core Page editor panel verifies intent and editing permis
   assert.match(source, /sanitize_text_field/);
   assert.match(source, /esc_attr/);
 });
+
+test('Portfolio Engine manages centralized Affiliate Offer records through a protected Product panel', async () => {
+  const source = await readPluginFile('includes/class-meta-boxes.php');
+  assert.match(source, /add_affiliate_offers_meta_box/);
+  assert.match(source, /render_affiliate_offers_meta_box/);
+  assert.match(source, /wp_nonce_field\( 'nattrix_save_affiliate_offers', 'nattrix_affiliate_offers_nonce' \)/);
+  assert.match(source, /wp_verify_nonce\( \$nonce, 'nattrix_save_affiliate_offers' \)/);
+  assert.match(source, /sanitize_offers\( wp_unslash\( \$offers \) \)/);
+  assert.match(source, /current_user_can\( 'edit_post', \$post_id \)/);
+});

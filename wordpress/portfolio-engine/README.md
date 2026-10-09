@@ -28,6 +28,8 @@ Editors with permission can manage these values through the **Nattrix Core Page*
 
 Product records hold a sanitized `nattrix_affiliate_offers` array. Each reference has an `offer_id`, merchant name, destination URL, optional affiliate URL, disclosure label, and status. Article HTML must refer to a Product or Offer record rather than contain a copied affiliate URL.
 
+Administrators can add or edit offer records in the **Nattrix Affiliate Offers** panel on a Product record. A blank offer row is shown for a new record; leave it blank to avoid creating an offer. The editor rejects duplicate offer IDs, invalid statuses, and non-HTTP(S) destination URLs.
+
 ## Access control
 
 - Product records have distinct WordPress capabilities. Activation grants them to administrators only.

@@ -15,7 +15,47 @@ final class Meta_Boxes {
 
     public function register(): void {
         add_action( 'add_meta_boxes', array( $this, 'add_core_page_meta_box' ) );
+        add_action( 'add_meta_boxes', array( $this, 'add_affiliate_offers_meta_box' ) );
         add_action( 'save_post', array( $this, 'save_core_page_meta' ), 10, 3 );
+        add_action( 'save_post', array( $this, 'save_affiliate_offers' ), 10, 3 );
+    }
+
+    public function add_affiliate_offers_meta_box(): void {
+        add_meta_box(
+            'nattrix-affiliate-offers',
+            __( 'Nattrix Affiliate Offers', 'nattrix-portfolio-engine' ),
+            array( $this, 'render_affiliate_offers_meta_box' ),
+            Content_Types::PRODUCT_POST_TYPE,
+            'normal',
+            'default'
+        );
+    }
+
+    public function render_affiliate_offers_meta_box( \WP_Post $post ): void {
+        $offers = get_post_meta( $post->ID, 'nattrix_affiliate_offers', true );
+        $offers = is_array( $offers ) ? $offers : array();
+        $offers[] = array( 'offer_id' => '', 'merchant_name' => '', 'destination_url' => '', 'affiliate_url' => '', 'disclosure_label' => '', 'status' => 'inactive' );
+        wp_nonce_field( 'nattrix_save_affiliate_offers', 'nattrix_affiliate_offers_nonce' );
+        ?>
+        <p><?php esc_html_e( 'Store offers here so article content can reference a centralized record. Do not paste affiliate URLs into article HTML.', 'nattrix-portfolio-engine' ); ?></p>
+        <?php foreach ( $offers as $index => $offer ) : ?>
+            <fieldset style="border:1px solid #ccd0d4; margin:12px 0; padding:12px;">
+                <legend><?php echo esc_html( sprintf( __( 'Offer %d', 'nattrix-portfolio-engine' ), $index + 1 ) ); ?></legend>
+                <p><label><?php esc_html_e( 'Offer ID', 'nattrix-portfolio-engine' ); ?><br /><input class="regular-text" name="nattrix_affiliate_offers[<?php echo esc_attr( (string) $index ); ?>][offer_id]" value="<?php echo esc_attr( $offer['offer_id'] ?? '' ); ?>" /></label></p>
+                <p><label><?php esc_html_e( 'Merchant name', 'nattrix-portfolio-engine' ); ?><br /><input class="regular-text" name="nattrix_affiliate_offers[<?php echo esc_attr( (string) $index ); ?>][merchant_name]" value="<?php echo esc_attr( $offer['merchant_name'] ?? '' ); ?>" /></label></p>
+                <p><label><?php esc_html_e( 'Destination URL', 'nattrix-portfolio-engine' ); ?><br /><input class="large-text" type="url" name="nattrix_affiliate_offers[<?php echo esc_attr( (string) $index ); ?>][destination_url]" value="<?php echo esc_attr( $offer['destination_url'] ?? '' ); ?>" /></label></p>
+                <p><label><?php esc_html_e( 'Affiliate URL', 'nattrix-portfolio-engine' ); ?><br /><input class="large-text" type="url" name="nattrix_affiliate_offers[<?php echo esc_attr( (string) $index ); ?>][affiliate_url]" value="<?php echo esc_attr( $offer['affiliate_url'] ?? '' ); ?>" /></label></p>
+                <p><label><?php esc_html_e( 'Disclosure label', 'nattrix-portfolio-engine' ); ?><br /><input class="regular-text" name="nattrix_affiliate_offers[<?php echo esc_attr( (string) $index ); ?>][disclosure_label]" value="<?php echo esc_attr( $offer['disclosure_label'] ?? '' ); ?>" /></label></p>
+                <p><label><?php esc_html_e( 'Status', 'nattrix-portfolio-engine' ); ?><br />
+                    <select name="nattrix_affiliate_offers[<?php echo esc_attr( (string) $index ); ?>][status]">
+                        <?php foreach ( array( 'active', 'inactive', 'expired' ) as $status ) : ?>
+                            <option value="<?php echo esc_attr( $status ); ?>" <?php selected( $offer['status'] ?? 'inactive', $status ); ?>><?php echo esc_html( ucfirst( $status ) ); ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </label></p>
+            </fieldset>
+        <?php endforeach; ?>
+        <?php
     }
 
     public function add_core_page_meta_box(): void {
@@ -74,6 +114,21 @@ final class Meta_Boxes {
         update_post_meta( $post_id, 'nattrix_core_page_type', $this->meta_models->sanitize_core_page_type( $this->post_value( 'nattrix_core_page_type' ) ) );
         update_post_meta( $post_id, 'nattrix_core_priority', $this->meta_models->sanitize_priority( $this->post_value( 'nattrix_core_priority' ) ) );
         update_post_meta( $post_id, 'nattrix_core_review_state', $this->meta_models->sanitize_review_state( $this->post_value( 'nattrix_core_review_state' ) ) );
+    }
+
+    public function save_affiliate_offers( int $post_id, \WP_Post $post, bool $update ): void {
+        if ( Content_Types::PRODUCT_POST_TYPE !== $post->post_type || ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) ) {
+            return;
+        }
+        $nonce = sanitize_text_field( $this->post_value( 'nattrix_affiliate_offers_nonce' ) );
+        if ( ! wp_verify_nonce( $nonce, 'nattrix_save_affiliate_offers' ) || ! current_user_can( 'edit_post', $post_id ) ) {
+            return;
+        }
+        $offers = $_POST['nattrix_affiliate_offers'] ?? array();
+        if ( ! is_array( $offers ) ) {
+            return;
+        }
+        update_post_meta( $post_id, 'nattrix_affiliate_offers', $this->meta_models->sanitize_offers( wp_unslash( $offers ) ) );
     }
 
     private function post_value( string $key ): string {
