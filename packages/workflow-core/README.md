@@ -27,6 +27,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `BatchRunner` requires a successful `validateDraftPackage` result before a job can enter `qa_passed`; human approval remains separately required for later gated states.
 - `createApprovalDecision` records a structured human approve-or-return decision. `BatchRunner` requires that record before an item can enter `approved` or `scheduled`.
 - `validateResearchArtifact` requires attributable source records and makes unresolved assumptions explicit before strategy or drafting work proceeds.
+- `scoreModelEvaluation` and `selectEvaluationChampion` score deterministic offline fixtures by observed cost per accepted result after a stated acceptance threshold. They never make provider requests or promote an allowlist automatically.
 
 ## Security boundary
 

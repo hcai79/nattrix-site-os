@@ -5,7 +5,8 @@ import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, summarizeUsage, transition, retryFrom, validatePlanRows,
   validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter,
-  StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage, createApprovalDecision, validateResearchArtifact
+  StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage, createApprovalDecision, validateResearchArtifact,
+  scoreModelEvaluation, selectEvaluationChampion
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -329,4 +330,17 @@ test('media manifest blocks generated exact product imagery and queues technical
     { asset: 1, asset_id: 'asset-1', reason: 'mandatory_human_visual_review' },
     { asset: 2, asset_id: 'asset-2', reason: 'product_accuracy_review' }
   ]);
+});
+
+test('offline model evaluation chooses the lowest observed cost per accepted result above threshold', () => {
+  const scores = scoreModelEvaluation({ taskType: 'classification', results: [
+    { model: 'economy-a', accepted: true, cost_usd: 0.02 },
+    { model: 'economy-a', accepted: true, cost_usd: 0.02 },
+    { model: 'economy-b', accepted: true, cost_usd: 0.01 },
+    { model: 'economy-b', accepted: false, cost_usd: 0.01 }
+  ] });
+  assert.equal(selectEvaluationChampion(scores, { minimumAcceptanceRate: 0.9 }).model, 'economy-a');
+  assert.equal(selectEvaluationChampion(scores, { minimumAcceptanceRate: 1 }).cost_per_accepted_result, 0.02);
+  assert.equal(selectEvaluationChampion(scores.filter((score) => score.model === 'economy-b'), { minimumAcceptanceRate: 0.9 }), null);
+  assert.throws(() => scoreModelEvaluation({ taskType: 'classification', results: [] }), /at least one/);
 });
