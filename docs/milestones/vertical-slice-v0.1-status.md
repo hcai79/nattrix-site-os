@@ -14,12 +14,12 @@ Branch: `codex/vertical-slice-contracts`
 | Evidence and risk gates | Claim evidence validation, risk bands, and review triggers | Complete offline |
 | Media policy | Provenance validation and human-review queue for technical or product-sensitive visuals | Complete offline |
 | Draft rendering and QA | Basic Gutenberg renderer plus combined draft, evidence, and media QA gate that is required before `qa_passed` | Complete offline |
-| WordPress handoff | Read-only mock adapter and staging-only draft adapter with explicit runtime authorization and idempotency store | Contract complete |
+| WordPress handoff | Read-only mock adapter plus staging-only draft and scheduling adapters, each with explicit runtime authorization, idempotency, and approval guards | Contract complete |
 | Portfolio Engine prerequisite | Product model, taxonomies, Core Page controls, Affiliate Offer model and protected admin editor, REST namespace, settings, and static tests | Staging validation required |
 
 ## Verified acceptance evidence
 
-The offline suite currently has 24 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, malformed workbook rows, URL collisions, uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, structured human approvals, Gutenberg rendering, staging-only draft restrictions, and Portfolio Engine capability and input contracts.
+The offline suite currently has 26 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, malformed workbook rows, URL collisions, source-attributed research, uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, structured human approvals, Gutenberg rendering, staging-only draft and scheduling restrictions, and Portfolio Engine capability and input contracts.
 
 ## Still blocked by environment or owner decisions
 
