@@ -281,6 +281,7 @@ test('batch runner requires a structured human decision before approval or sched
   assert.equal(staged.state, 'staged');
   assert.equal(scheduled.state, 'scheduled');
   assert.throws(() => createApprovalDecision({ contentId: 'circuits-approval-1', actor: 'reviewer', decision: 'returned' }), /requires a reason/);
+  assert.throws(() => createApprovalDecision({ contentId: 'circuits-approval-1', actor: 'automation-worker', actorType: 'agent', decision: 'approved' }), /human actor/);
 });
 
 test('media manifest blocks generated exact product imagery and queues technical graphics for review', () => {
