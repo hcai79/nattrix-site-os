@@ -5,7 +5,7 @@ import {
   validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, summarizeUsage, transition, retryFrom, validatePlanRows,
   validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter,
-  StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage, createApprovalDecision
+  StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage, createApprovalDecision, validateResearchArtifact
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -104,6 +104,19 @@ test('routing policy stays mocked until model allowlists are benchmarked', async
   assert.equal(route.live, false);
   assert.equal(result.output.title, 'Fixture title');
   assert.equal(result.telemetry.provider, 'mock');
+});
+
+test('research artifacts require attributable sources and surface unresolved assumptions', () => {
+  const artifact = validateResearchArtifact({
+    artifact_id: 'research-1', site_id: 'circuits-at-home', content_id: 'circuits-1', query: 'best multimeter for beginners', gathered_at: '2026-10-09T00:00:00Z',
+    sources: [{ source_id: 'manual-1', title: 'Product manual', url: 'https://example.com/manual', source_type: 'official_documentation', retrieved_at: '2026-10-09T00:00:00Z' }],
+    assumptions: [{ text: 'The reader owns basic safety equipment.', status: 'open' }]
+  });
+  assert.equal(artifact.valid, true);
+  assert.deepEqual(artifact.unresolvedAssumptions, [{ assumption: 1, text: 'The reader owns basic safety equipment.' }]);
+  const invalid = validateResearchArtifact({ artifact_id: 'research-2', site_id: 'circuits-at-home', content_id: 'circuits-2', query: 'query', gathered_at: 'bad-date', sources: [] });
+  assert.equal(invalid.valid, false);
+  assert.ok(invalid.errors.some((error) => error.code === 'sources_missing'));
 });
 
 test('live provider cannot make a request without an explicit opt-in and an allowlisted model', async () => {

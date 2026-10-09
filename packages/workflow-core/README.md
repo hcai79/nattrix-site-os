@@ -26,6 +26,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `validateDraftPackage` runs the Gutenberg, evidence, and media gates together and prepares an item for human review. It never approves or publishes content.
 - `BatchRunner` requires a successful `validateDraftPackage` result before a job can enter `qa_passed`; human approval remains separately required for later gated states.
 - `createApprovalDecision` records a structured human approve-or-return decision. `BatchRunner` requires that record before an item can enter `approved` or `scheduled`.
+- `validateResearchArtifact` requires attributable source records and makes unresolved assumptions explicit before strategy or drafting work proceeds.
 
 ## Security boundary
 
