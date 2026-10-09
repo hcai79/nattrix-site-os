@@ -15,11 +15,13 @@ Prefer:
 
 Every material factual claim should have:
 - claim
-- source
+- source URL
 - source type
 - checked date
 - confidence
-- notes
+- contextual notes explaining the exact evidence, limitations, plan or billing assumptions, and whether the statement is retained, unresolved, or removed
+
+Evidence packs must not treat a bare source list as verification. When a source is vendor-owned, label it as a manufacturer claim unless a separate test record or independent primary evidence supports a stronger classification.
 
 ## Product fields requiring primary-source verification where possible
 
