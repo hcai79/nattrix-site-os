@@ -53,6 +53,7 @@ The following first-party starting sources were recorded in the Operations Hub o
 - [Submagic pricing](https://www.submagic.co/pricing)
 - [Captions plans](https://www.captions.ai/plans)
 - [Kapwing pricing](https://www.kapwing.com/pricing)
+- [VEED video editor and plan guidance](https://www.veed.io/tools/video-editor)
 
 ## Publishing guardrail
 
