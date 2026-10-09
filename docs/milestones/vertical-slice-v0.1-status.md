@@ -27,7 +27,7 @@ The offline suite currently has 26 passing checks. It covers no-live-provider de
 2. **Staging endpoint and least-privilege account:** required to exercise the staging draft adapter and Portfolio Engine activation runbook.
 3. **Approved five-item batch:** required before a real pilot can move past offline fixtures. The batch should use CircuitsAtHome first under the current architecture.
 4. **Model evaluation results:** OpenRouter remains disabled until task-specific quality, safety, and cost results define an allowlist. No live paid request has been sent.
-5. **Human-review interface:** the contracts expose review gates, but a dashboard is intentionally deferred. An approved interim reviewer workflow is needed before live staging scheduling.
+5. **Human-review interface:** the contracts expose review gates, and the [interim reviewer workflow](../development/interim-reviewer-workflow.md) documents the minimal auditable process. A dashboard is intentionally deferred.
 
 ## Explicit non-goals still respected
 
