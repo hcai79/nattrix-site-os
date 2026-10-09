@@ -1,0 +1,41 @@
+# Vertical Slice v0.1 Implementation Status
+
+Status date: 2026-10-09  
+Branch: `codex/vertical-slice-contracts`
+
+## Delivered offline contracts
+
+| Milestone deliverable | Current implementation | Status |
+| --- | --- | --- |
+| Site Blueprint and seed config | Validated Site Blueprint contract and CircuitsAtHome seed | Complete offline |
+| URL and workbook safety | Canonical inventory normalization, collision detection, CSV round trip, plan preview validation | Complete offline |
+| Model gateway | Mock-by-default OpenRouter adapter, model allowlists, explicit paid opt-in, and budget ledger | Complete offline |
+| Five-item execution | Bounded, idempotent batch runner with correction-state resume | Complete offline |
+| Evidence and risk gates | Claim evidence validation, risk bands, and review triggers | Complete offline |
+| Media policy | Provenance validation and human-review queue for technical or product-sensitive visuals | Complete offline |
+| Draft rendering and QA | Basic Gutenberg renderer plus combined draft, evidence, and media QA gate | Complete offline |
+| WordPress handoff | Read-only mock adapter and staging-only draft adapter with explicit runtime authorization and idempotency store | Contract complete |
+| Portfolio Engine prerequisite | Product model, taxonomies, Core Page controls, Affiliate Offer model and protected admin editor, REST namespace, settings, and static tests | Staging validation required |
+
+## Verified acceptance evidence
+
+The offline suite currently has 21 passing checks. It covers no-live-provider defaults, spending caps, malformed workbook rows, URL collisions, uncited high-impact claims, restricted media types, duplicate scheduling prevention, Gutenberg rendering, staging-only draft restrictions, and Portfolio Engine capability and input contracts.
+
+## Still blocked by environment or owner decisions
+
+1. **PHP and WordPress integration tests:** this workspace does not have a PHP or WordPress runtime. The plugin has static contract coverage only until it is installed on a staging clone.
+2. **Staging endpoint and least-privilege account:** required to exercise the staging draft adapter and Portfolio Engine activation runbook.
+3. **Approved five-item batch:** required before a real pilot can move past offline fixtures. The batch should use CircuitsAtHome first under the current architecture.
+4. **Model evaluation results:** OpenRouter remains disabled until task-specific quality, safety, and cost results define an allowlist. No live paid request has been sent.
+5. **Human-review interface:** the contracts expose review gates, but a dashboard is intentionally deferred. An approved interim reviewer workflow is needed before live staging scheduling.
+
+## Explicit non-goals still respected
+
+- No production WordPress write or publication
+- No Supabase, n8n, GSC, dashboard, or AI-publishing implementation
+- No stored credentials or live OpenRouter usage
+- No automated commercial-page changes
+
+## Recommended next gate
+
+Provide a non-production WordPress staging URL and least-privilege integration account. Then run the [Portfolio Engine staging validation](../development/portfolio-engine-staging-validation.md), activate only on staging, and execute one approved mock-to-staging draft before selecting the real five-item pilot.
