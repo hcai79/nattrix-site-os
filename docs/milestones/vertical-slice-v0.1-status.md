@@ -10,7 +10,7 @@ Branch: `codex/vertical-slice-contracts`
 | Site Blueprint and seed config | Validated Site Blueprint contract and CircuitsAtHome seed | Complete offline |
 | URL and workbook safety | Canonical inventory normalization, collision detection, CSV round trip, plan preview validation | Complete offline |
 | Model gateway | Mock-by-default OpenRouter adapter, model allowlists, explicit paid opt-in, budget ledger, and route-level usage summary | Complete offline |
-| Five-item execution | Bounded, idempotent batch runner with correction-state resume | Complete offline |
+| Five-item execution | Bounded, idempotent batch runner with correction-state resume, draft QA gate, and structured approve-or-return records | Complete offline |
 | Evidence and risk gates | Claim evidence validation, risk bands, and review triggers | Complete offline |
 | Media policy | Provenance validation and human-review queue for technical or product-sensitive visuals | Complete offline |
 | Draft rendering and QA | Basic Gutenberg renderer plus combined draft, evidence, and media QA gate that is required before `qa_passed` | Complete offline |
@@ -19,7 +19,7 @@ Branch: `codex/vertical-slice-contracts`
 
 ## Verified acceptance evidence
 
-The offline suite currently has 23 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, malformed workbook rows, URL collisions, uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, Gutenberg rendering, staging-only draft restrictions, and Portfolio Engine capability and input contracts.
+The offline suite currently has 24 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, malformed workbook rows, URL collisions, uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, structured human approvals, Gutenberg rendering, staging-only draft restrictions, and Portfolio Engine capability and input contracts.
 
 ## Still blocked by environment or owner decisions
 
