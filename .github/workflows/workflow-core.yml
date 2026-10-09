@@ -21,3 +21,7 @@ jobs:
           node-version: 22
       - name: Run deterministic tests
         run: npm test
+      - name: Lint Portfolio Engine PHP
+        run: |
+          php --version
+          find wordpress/portfolio-engine -type f -name '*.php' -print0 | xargs -0 -n1 php -l
