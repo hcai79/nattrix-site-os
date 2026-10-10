@@ -16,6 +16,7 @@ Offline-safe, dependency-free JavaScript contracts for the Vertical Slice v0.1. 
 - `retryFrom(job, state, options)` creates an auditable, resumable correction transition without duplicate publishing behavior.
 - `validatePlanRows(rows, context)` validates editable workbook rows and produces a non-persisting collision and evidence preview.
 - `validateEvidencePack(pack)` requires each factual claim to include claim text, class, impact, confidence, source URL and type, checked date, and contextual notes. It blocks uncited high-impact claims and identifies human-review triggers.
+- `evaluateInternalLinkAudit(audit)` summarizes deterministic internal-link results and blocks invalid, off-site, or 4xx/5xx destinations without making network requests.
 - `calculateRiskBand(dimensions)` maps documented risk dimensions to a required review depth.
 - `exportCsv(rows, columns)` and `parseCsv(csv)` enable a dependency-free, round-trip-safe CSV boundary before workbook file adapters are introduced.
 - `BatchRunner` queues no more than five unique items, preserves job identity, and supports auditable correction/resume behavior without publishing.

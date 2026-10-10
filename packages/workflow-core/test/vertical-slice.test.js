@@ -6,7 +6,7 @@ import {
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, summarizeUsage, transition, retryFrom, validatePlanRows,
   validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter,
   StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage, createApprovalDecision, validateResearchArtifact,
-  scoreModelEvaluation, selectEvaluationChampion
+  scoreModelEvaluation, selectEvaluationChampion, evaluateInternalLinkAudit
 } from '../src/index.js';
 
 const root = new URL('../../../', import.meta.url);
@@ -272,6 +272,24 @@ test('evidence packs require contextual notes for every factual claim', () => {
   });
   assert.equal(result.valid, false);
   assert.ok(result.errors.some((error) => error.code === 'notes_missing'));
+});
+
+test('internal link audits distinguish healthy destinations, redirects, and blockers', () => {
+  const audit = evaluateInternalLinkAudit({
+    siteDomain: 'techvideoblog.com',
+    results: [
+      { target_url: 'https://techvideoblog.com/tools/capcut-review/', status_code: 200 },
+      { target_url: 'https://techvideoblog.com/tools/captions-ai-review/', status_code: 301 },
+      { target_url: 'https://techvideoblog.com/tools/missing/', status_code: 404 }
+    ]
+  });
+  assert.equal(audit.valid, false);
+  assert.deepEqual(audit.summary, { checked: 3, resolved_200: 1, redirects: 1, broken: 1 });
+  assert.deepEqual(audit.issues, [
+    { link: 2, target_url: 'https://techvideoblog.com/tools/captions-ai-review/', reason: 'redirect_destination', blocking: false },
+    { link: 3, target_url: 'https://techvideoblog.com/tools/missing/', reason: 'broken_destination', blocking: true }
+  ]);
+  assert.throws(() => evaluateInternalLinkAudit({ results: [] }), /siteDomain/);
 });
 
 test('CSV export and import preserve values while rejecting malformed workbook input', () => {

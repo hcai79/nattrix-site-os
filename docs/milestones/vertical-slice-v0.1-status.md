@@ -8,7 +8,7 @@ Branch: `codex/vertical-slice-contracts`
 | Milestone deliverable | Current implementation | Status |
 | --- | --- | --- |
 | Site Blueprint and seed config | Validated Site Blueprint contract and CircuitsAtHome seed | Complete offline |
-| URL and workbook safety | Canonical inventory normalization, collision detection, CSV round trip, plan preview validation | Complete offline |
+| URL and workbook safety | Canonical inventory normalization, collision detection, deterministic internal-link audit, CSV round trip, plan preview validation | Complete offline |
 | Model gateway | Mock-by-default OpenRouter adapter, model allowlists, explicit paid opt-in, budget ledger, route-level usage summary, and deterministic cost-per-accepted-result scoring | Complete offline |
 | Five-item execution | Bounded, idempotent batch runner with correction-state resume, draft QA gate, and structured approve-or-return records | Complete offline |
 | Evidence and risk gates | Claim evidence validation, contextual notes, risk bands, and review triggers | Complete offline |
@@ -19,7 +19,7 @@ Branch: `codex/vertical-slice-contracts`
 
 ## Verified acceptance evidence
 
-The offline suite currently has 28 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, deterministic model-evaluation scoring, malformed workbook rows, URL collisions, source-attributed research, evidence notes and uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, structured human approvals, Gutenberg rendering, staging-only draft and scheduling restrictions, and Portfolio Engine capability and input contracts.
+The offline suite currently has 29 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, deterministic model-evaluation scoring, malformed workbook rows, URL collisions, deterministic internal-link result classification, source-attributed research, evidence notes and uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, structured human approvals, Gutenberg rendering, staging-only draft and scheduling restrictions, and Portfolio Engine capability and input contracts.
 
 ## Still blocked by environment or owner decisions
 
