@@ -12,6 +12,8 @@
 
 This 1,321-word Core 40 commercial guide compares Submagic, VEED, Captions.ai, and Maestra. It includes tool cards, a pricing-and-limits snapshot, privacy and AI-training checks, a selection framework, methodology, related guides, and FAQs. Its WordPress modification date is 2026-05-10. Subtitle-workflow claims must be refreshed with evidence for language coverage, translation versus transcription scope, export formats, accuracy framing, free-plan limits, and data handling.
 
+The stored SEO title is `Best AI Subtitle Generators (2026): Tested AI Video Tools`. No manual test record was retrieved during this audit. Retain the `Tested` wording only if a dated TechVideoBlog test record is supplied; otherwise include a source-backed title alternative in the future human-review brief. Do not change the live title or metadata from this finding alone.
+
 ## Priority claim inventory
 
 | Area | Tools or statements represented | Refresh requirement |
