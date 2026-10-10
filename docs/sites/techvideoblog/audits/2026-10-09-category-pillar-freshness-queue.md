@@ -25,6 +25,16 @@ The first-pass audits are complete. Next, build the source ledger and staging br
 4. Best AI Avatar Tools because privacy, consent, training, and localization statements need primary sources.
 5. Best AI Subtitle Generators, after the Captions AI routing decision and shared subtitle evidence are available.
 
+## Next-wave audit coverage
+
+The following Core 40 pages have also received read-only first-pass audits. They are ready for evidence collection in the Operations Hub, but are not approved for a live refresh.
+
+| Page | ID | Audit | Primary evidence concerns |
+| --- | --- | --- | --- |
+| Best AI Video Translators | 689 | [2026-10-10 audit](2026-10-10-best-ai-video-translators-freshness.md) | Distinguish subtitles, translated audio, dubbing, lip sync, voice options, language coverage, and related policy terms. |
+| Best AI Voice Cloning Tools | 690 | [2026-10-10 audit](2026-10-10-best-ai-voice-cloning-tools-freshness.md) | Verify consent, voice likeness, impersonation safeguards, commercial use, retention, and training terms as separate claims. |
+| Best AI Thumbnail Generators | 806 | [2026-10-10 audit](2026-10-10-best-ai-thumbnail-generators-freshness.md) | Verify generation scope, asset licenses, commercial use, templates, brand controls, plan limits, and policy claims. |
+
 ## Repeatable review method
 
 For each page, make a source ledger before proposing a staging draft:
