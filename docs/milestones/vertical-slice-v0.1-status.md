@@ -1,6 +1,6 @@
 # Vertical Slice v0.1 Implementation Status
 
-Status date: 2026-10-09  
+Status date: 2026-10-10  
 Branch: `codex/vertical-slice-contracts`
 
 ## Delivered offline contracts
@@ -11,7 +11,7 @@ Branch: `codex/vertical-slice-contracts`
 | URL and workbook safety | Canonical inventory normalization, collision detection, CSV round trip, plan preview validation | Complete offline |
 | Model gateway | Mock-by-default OpenRouter adapter, model allowlists, explicit paid opt-in, budget ledger, route-level usage summary, and deterministic cost-per-accepted-result scoring | Complete offline |
 | Five-item execution | Bounded, idempotent batch runner with correction-state resume, draft QA gate, and structured approve-or-return records | Complete offline |
-| Evidence and risk gates | Claim evidence validation, risk bands, and review triggers | Complete offline |
+| Evidence and risk gates | Claim evidence validation, contextual notes, risk bands, and review triggers | Complete offline |
 | Media policy | Provenance validation and human-review queue for technical or product-sensitive visuals | Complete offline |
 | Draft rendering and QA | Basic Gutenberg renderer plus combined draft, evidence, and media QA gate that is required before `qa_passed` | Complete offline |
 | WordPress handoff | Read-only mock adapter plus staging-only draft and scheduling adapters, each with explicit runtime authorization, idempotency, and approval guards | Contract complete |
@@ -19,7 +19,7 @@ Branch: `codex/vertical-slice-contracts`
 
 ## Verified acceptance evidence
 
-The offline suite currently has 27 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, deterministic model-evaluation scoring, malformed workbook rows, URL collisions, source-attributed research, uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, structured human approvals, Gutenberg rendering, staging-only draft and scheduling restrictions, and Portfolio Engine capability and input contracts.
+The offline suite currently has 28 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, deterministic model-evaluation scoring, malformed workbook rows, URL collisions, source-attributed research, evidence notes and uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, structured human approvals, Gutenberg rendering, staging-only draft and scheduling restrictions, and Portfolio Engine capability and input contracts.
 
 ## Still blocked by environment or owner decisions
 
