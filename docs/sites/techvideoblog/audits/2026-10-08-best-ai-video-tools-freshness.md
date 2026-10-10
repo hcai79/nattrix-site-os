@@ -31,6 +31,28 @@ For each tool represented with a price, free-plan, policy, data-use, watermark, 
 2. CapCut, Klap, Kapwing, and Pika, because they are part of current workflow recommendations.
 3. Any additional tool found in the complete pricing or policy tables before the draft is finalized.
 
+## Internal-link verification
+
+The page's 15 internal review, category, methodology, and disclosure destinations were rechecked on 2026-10-10. All returned HTTP 200:
+
+- `/tools/opus-clip-review/`
+- `/tools/submagic-review/`
+- `/tools/veed-review/`
+- `/tools/runway-review/`
+- `/tools/heygen-review/`
+- `/tools/descript-review/`
+- `/tools/capcut-review/`
+- `/tools/pictory-review/`
+- `/tools/invideo-review/`
+- `/tools/canva-video-review/`
+- `/how-we-test-ai-tools/`
+- `/affiliate-disclosure/`
+- `/tool-category/ai-caption-tools/`
+- `/tool-category/ai-video-editors/`
+- `/tool-category/video-repurposing-tools/`
+
+No link repair is needed. Preserve the existing destinations during a future evidence-led, staging-only refresh unless an approved decision covers a change.
+
 ## Publishing guardrail
 
 Prepare one block-preserving staging draft after the evidence pack is complete. Preserve the existing URL, canonical behavior, hierarchy, internal-link targets, and affiliate treatment unless a separate owner approval covers a change. Human approval remains required before updating this commercial pillar.
