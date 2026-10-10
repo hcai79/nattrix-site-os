@@ -1,8 +1,8 @@
 # Opus Clip Review Freshness Audit
 
-Audit date: 2026-10-08  
-URL reviewed: `https://techvideoblog.com/tools/opus-clip-review/`  
-Content ID: `840`  
+Audit date: 2026-10-08
+URL reviewed: `https://techvideoblog.com/tools/opus-clip-review/`
+Content ID: `840`
 Scope: read-only production review. No WordPress content, SEO field, link, offer, plugin, theme, or setting was changed.
 
 ## What is currently present

@@ -1,6 +1,6 @@
 # Category Pillar Freshness Queue
 
-Audit date: 2026-10-09  
+Audit date: 2026-10-09
 Scope: read-only production inspection of five Core 40 category pillars. No production page, metadata, URL, canonical, taxonomy, plugin, or theme setting was changed.
 
 ## Confirmed candidates

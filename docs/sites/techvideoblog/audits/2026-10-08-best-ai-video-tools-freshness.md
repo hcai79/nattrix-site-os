@@ -1,8 +1,8 @@
 # Best AI Video Tools Freshness Audit
 
-Audit date: 2026-10-08  
-URL reviewed: `https://techvideoblog.com/tool-category/best-ai-video-tools/`  
-Content ID: `810`  
+Audit date: 2026-10-08
+URL reviewed: `https://techvideoblog.com/tool-category/best-ai-video-tools/`
+Content ID: `810`
 Scope: read-only production inspection. No published content, SEO field, URL, canonical, affiliate link, plugin, or theme setting was changed.
 
 ## Verified page state

@@ -1,8 +1,8 @@
 # Rev Subtitles Review QA
 
-Audit date: 2026-10-09  
-Post ID: `1485`  
-URL: `https://techvideoblog.com/rev-review/`  
+Audit date: 2026-10-09
+Post ID: `1485`
+URL: `https://techvideoblog.com/rev-review/`
 Scope: read-only production audit. No post, SEO field, outbound link, URL, canonical, or setting was changed.
 
 ## Structural snapshot

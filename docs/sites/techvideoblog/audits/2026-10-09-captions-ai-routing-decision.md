@@ -1,7 +1,7 @@
 # Captions AI Review Routing Decision Record
 
-Checked: 2026-10-09  
-Affected Core 40 page: Captions AI Review, WordPress page ID `820`  
+Checked: 2026-10-09
+Affected Core 40 page: Captions AI Review, WordPress page ID `820`
 Published source URL: `https://techvideoblog.com/tools/captions-ai-review/`
 
 ## Read-only verification
