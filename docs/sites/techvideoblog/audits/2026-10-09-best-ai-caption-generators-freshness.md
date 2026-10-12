@@ -61,6 +61,8 @@ The following first-party starting sources were recorded in the Operations Hub o
 - [Maestra pricing](https://maestra.ai/pricing?type=real-time)
 - [Descript pricing](https://www.descript.com/price)
 
+An initial, non-authorizing [C05 source ledger](../evidence/2026-10-12-c05-caption-generators-initial-ledger.md) now records first-party sources and preserves the Captions routing decision as a blocker for link changes.
+
 ## Publishing guardrail
 
 Prepare a block-preserving staging draft only when the required claims are sourced and a human reviewer has approved the scoped update. Keep the page's existing URL, canonical behavior, affiliate treatment, internal-link destinations, and visual design unchanged unless a separate approval explicitly covers a change.
