@@ -17,7 +17,7 @@ All five URLs resolved to existing published WordPress Pages during the inspecti
 
 ## Recommended order
 
-The first-pass audits are complete. Partial source ledgers exist for C01, C02, C03, and C05. No ledger is a staging brief or authorizes a live change. Complete the remaining claim rows and source gaps in this order:
+The first-pass audits are complete. Partial source ledgers exist for C01, C02, C03, C05, and C06. No ledger is a staging brief or authorizes a live change. Complete the remaining claim rows and source gaps in this order:
 
 1. Best AI Video Editors because it now has initial official-source records in the Operations Hub and connects to established reviews.
 2. Best AI Caption Generators, after the Captions AI routing decision is made.
