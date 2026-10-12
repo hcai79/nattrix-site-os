@@ -3,6 +3,8 @@
 Audit date: 2026-10-09
 Scope: read-only production inspection of five Core 40 category pillars. No production page, metadata, URL, canonical, taxonomy, plugin, or theme setting was changed.
 
+See the [evidence ledger index](../evidence/README.md) for the current source-collection status across these and next-wave pages.
+
 ## Confirmed candidates
 
 | Priority | Page | ID | URL | Last modified | Audit status | Why it is queued |
