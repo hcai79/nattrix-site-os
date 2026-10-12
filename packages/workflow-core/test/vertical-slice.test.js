@@ -17,6 +17,13 @@ test('CircuitsAtHome blueprint meets the shared contract', async () => {
   assert.deepEqual(validateSiteBlueprint(blueprint), { valid: true, errors: [] });
 });
 
+test('TechVideoBlog blueprint meets the shared contract with zero paid-model spend', async () => {
+  const blueprint = await readJson('sites/techvideoblog/site-blueprint.json');
+  assert.deepEqual(validateSiteBlueprint(blueprint), { valid: true, errors: [] });
+  assert.deepEqual(blueprint.spend_caps, { monthly_usd: 0, per_article_usd: 0 });
+  assert.equal(blueprint.status, 'read-only-pilot');
+});
+
 test('mock site adapter uses fixtures for read-only inventory and rejects writes', async () => {
   const blueprint = await readJson('sites/circuitsathome/site-blueprint.json');
   const urlRecords = await readJson('packages/workflow-core/fixtures/circuits-url-inventory.json');

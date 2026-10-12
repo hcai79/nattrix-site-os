@@ -7,7 +7,7 @@ Branch: `codex/vertical-slice-contracts`
 
 | Milestone deliverable | Current implementation | Status |
 | --- | --- | --- |
-| Site Blueprint and seed config | Validated Site Blueprint contract and CircuitsAtHome seed | Complete offline |
+| Site Blueprint and seed config | Validated Site Blueprint contract plus CircuitsAtHome and read-only TechVideoBlog seeds | Complete offline |
 | URL and workbook safety | Canonical inventory normalization, collision detection, deterministic internal-link audit, CSV round trip, plan preview validation | Complete offline |
 | Model gateway | Mock-by-default OpenRouter adapter, model allowlists, explicit paid opt-in, budget ledger, route-level usage summary, and deterministic cost-per-accepted-result scoring | Complete offline |
 | Five-item execution | Bounded, idempotent batch runner with correction-state resume, draft QA gate, and structured approve-or-return records | Complete offline |

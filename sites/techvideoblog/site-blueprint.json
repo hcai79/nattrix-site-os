@@ -1,0 +1,37 @@
+{
+  "site_id": "techvideoblog",
+  "domain": "techvideoblog.com",
+  "status": "read-only-pilot",
+  "wp_staging_base": null,
+  "locale": "en-US",
+  "audience": "Creators, marketers, and video teams evaluating AI video tools and practical workflows.",
+  "positioning": "AI video tool comparisons, reviews, and practical workflow guidance.",
+  "monetization_modes": ["affiliate", "editorial"],
+  "competitor_seed_domains": [],
+  "existing_url_policy": "preserve_and_review",
+  "cluster_policies": {
+    "commercial_pages": "human_approval_required",
+    "supporting_articles": "human_review_required_during_pilot"
+  },
+  "content_mix": {
+    "core_commercial": 0.4,
+    "supporting_informational": 0.6
+  },
+  "cadence_per_week": 5,
+  "style_token_profile": "ai-video-authority-v1",
+  "block_templates": [],
+  "legal_disclosures": ["affiliate_disclosure_required"],
+  "reviewer": "owner",
+  "escalation_rules": ["commercial_recommendation", "pricing_or_policy_claim", "voice_or_likeness_policy"],
+  "evidence_thresholds": {
+    "commercial_claims": "source_linked",
+    "pricing_or_policy_claims": "first_party_source_linked",
+    "voice_or_likeness_policy": "human_review_required"
+  },
+  "media_policy": "original_or_lawfully_licensed_with_provenance",
+  "spend_caps": {
+    "monthly_usd": 0,
+    "per_article_usd": 0
+  },
+  "experiment_policy": "human_approval_required"
+}
