@@ -37,6 +37,18 @@ test('onboarding checklist exposes missing staging prerequisites without authori
     site_id: 'bad-site', production_domain: 'example.com', inventory_complete: false,
     backup_restore_verified: false, production_writes_authorized: false, api_key: 'not-permitted'
   }).valid, false);
+  const stagingReady = validateOnboardingChecklist({
+    site_id: 'sample-site', production_domain: 'example.com', staging_base_url: 'https://staging.example.com',
+    inventory_complete: true, backup_restore_verified: true, integration_account_role: 'draft_editor',
+    reviewer: 'owner', production_writes_authorized: false
+  });
+  assert.equal(stagingReady.stagingReady, true);
+  assert.equal(stagingReady.productionWritesAuthorized, false);
+  assert.equal(validateOnboardingChecklist({
+    site_id: 'sample-site', production_domain: 'example.com', staging_base_url: 'https://example.com',
+    inventory_complete: true, backup_restore_verified: true, integration_account_role: 'draft_editor',
+    reviewer: 'owner', production_writes_authorized: false
+  }).valid, false);
 });
 
 test('mock site adapter uses fixtures for read-only inventory and rejects writes', async () => {

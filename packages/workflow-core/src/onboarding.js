@@ -24,6 +24,15 @@ export function validateOnboardingChecklist(checklist) {
   for (const field of ['inventory_complete', 'backup_restore_verified', 'production_writes_authorized']) {
     if (typeof checklist?.[field] !== 'boolean') errors.push(`${field} must be a boolean`);
   }
+  if (checklist?.staging_base_url) {
+    try {
+      const stagingUrl = new URL(checklist.staging_base_url);
+      if (stagingUrl.protocol !== 'https:') errors.push('staging_base_url must use HTTPS');
+      if (stagingUrl.hostname === checklist.production_domain) errors.push('staging_base_url must not use the production domain');
+    } catch {
+      errors.push('staging_base_url must be an absolute URL');
+    }
+  }
   const credentialLikeFields = findCredentialLikeFields(checklist);
   if (credentialLikeFields.length) errors.push(`Credential-like field names are not allowed: ${credentialLikeFields.join(', ')}`);
 

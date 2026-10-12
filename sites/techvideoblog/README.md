@@ -6,7 +6,7 @@ This directory holds configuration and audit artifacts for TechVideoBlog. It is 
 
 `onboarding-checklist.json` records only verified, non-secret observations from the read-only WordPress audit. It must be updated after a staging environment, a restore test, and a least-privilege integration account are available.
 
-The reusable `validateOnboardingChecklist` workflow contract reports staging blockers and only reports the explicit `production_writes_authorized` value. It cannot grant production access.
+The reusable `validateOnboardingChecklist` workflow contract reports staging blockers and only reports the explicit `production_writes_authorized` value. A configured staging URL must be HTTPS and must not be the production domain. The contract cannot grant production access.
 
 ## Before any staging connection
 
