@@ -2,6 +2,8 @@
 
 Status: partial, not a refresh brief
 
+This ledger follows the reusable [evidence-ledger template](../../../editorial/templates/evidence-ledger.md).
+
 Page: `https://techvideoblog.com/tool-category/best-ai-video-generators/`
 
 Scope: first-party source collection for the existing Runway and Pika sections. This file does not authorize a WordPress update, pricing change, recommendation change, or publication.
