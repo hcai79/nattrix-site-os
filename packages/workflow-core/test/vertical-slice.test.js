@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
-  validateSiteBlueprint, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
+  validateSiteBlueprint, validateOnboardingChecklist, buildUrlInventory, loadRoutingPolicy, selectMockRoute,
   BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, summarizeUsage, transition, retryFrom, validatePlanRows,
   validateEvidencePack, calculateRiskBand, exportCsv, parseCsv, BatchRunner, validateMediaManifest, MockSiteAdapter,
   StagingWordPressAdapter, renderGutenbergDraft, validateDraftPackage, createApprovalDecision, validateResearchArtifact,
@@ -22,6 +22,21 @@ test('TechVideoBlog blueprint meets the shared contract with zero paid-model spe
   assert.deepEqual(validateSiteBlueprint(blueprint), { valid: true, errors: [] });
   assert.deepEqual(blueprint.spend_caps, { monthly_usd: 0, per_article_usd: 0 });
   assert.equal(blueprint.status, 'read-only-pilot');
+});
+
+test('onboarding checklist exposes missing staging prerequisites without authorizing production writes', async () => {
+  const checklist = await readJson('sites/techvideoblog/onboarding-checklist.json');
+  const result = validateOnboardingChecklist(checklist);
+  assert.equal(result.valid, true);
+  assert.equal(result.stagingReady, false);
+  assert.deepEqual(result.stagingBlockers, [
+    'staging_url_missing', 'backup_restore_not_verified', 'least_privilege_role_missing', 'reviewer_missing'
+  ]);
+  assert.equal(result.productionWritesAuthorized, false);
+  assert.equal(validateOnboardingChecklist({
+    site_id: 'bad-site', production_domain: 'example.com', inventory_complete: false,
+    backup_restore_verified: false, production_writes_authorized: false, api_key: 'not-permitted'
+  }).valid, false);
 });
 
 test('mock site adapter uses fixtures for read-only inventory and rejects writes', async () => {
