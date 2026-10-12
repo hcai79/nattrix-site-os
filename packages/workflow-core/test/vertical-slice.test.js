@@ -75,10 +75,11 @@ test('Gutenberg renderer creates escaped blocks and only permits cited HTTP(S) s
 });
 
 test('staging adapter rejects production and only creates explicit staging drafts', async () => {
-  assert.throws(() => new StagingWordPressAdapter({ baseUrl: 'https://example.com', siteId: 'site-a', environment: 'production' }), /staging environment/);
+  assert.throws(() => new StagingWordPressAdapter({ baseUrl: 'https://example.com', productionDomain: 'example.com', siteId: 'site-a', environment: 'production' }), /staging environment/);
+  assert.throws(() => new StagingWordPressAdapter({ baseUrl: 'https://example.com', productionDomain: 'example.com', siteId: 'site-a', environment: 'staging' }), /must not use the production domain/);
   const requests = [];
   const adapter = new StagingWordPressAdapter({
-    baseUrl: 'https://staging.example.com',
+    baseUrl: 'https://staging.example.com', productionDomain: 'example.com',
     siteId: 'site-a',
     environment: 'staging',
     fetchImpl: async (url, options) => {
@@ -99,7 +100,7 @@ test('staging adapter rejects production and only creates explicit staging draft
 test('staging adapter schedules only approved drafts with an explicit staging opt-in', async () => {
   const requests = [];
   const adapter = new StagingWordPressAdapter({
-    baseUrl: 'https://staging.example.com', siteId: 'site-a', environment: 'staging',
+    baseUrl: 'https://staging.example.com', productionDomain: 'example.com', siteId: 'site-a', environment: 'staging',
     fetchImpl: async (url, options) => {
       requests.push({ url: url.toString(), options });
       return { ok: true, json: async () => ({ id: 55, status: 'future', link: 'https://staging.example.com/?p=55' }) };

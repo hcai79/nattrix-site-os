@@ -1,6 +1,6 @@
 import { buildUrlInventory } from './inventory.js';
-
 import { isApprovedForContent } from './approvals.js';
+import { isSafeHttpsUrl } from './urls.js';
 
 export class MockSiteAdapter {
   constructor({ blueprint, urlRecords = [], categories = [] }) {
@@ -28,10 +28,14 @@ export class MockSiteAdapter {
 }
 
 export class StagingWordPressAdapter {
-  constructor({ baseUrl, siteId, environment, fetchImpl = fetch, idempotencyStore = new Map() }) {
-    if (!baseUrl || !siteId) throw new Error('baseUrl and siteId are required');
+  constructor({ baseUrl, productionDomain, siteId, environment, fetchImpl = fetch, idempotencyStore = new Map() }) {
+    if (!baseUrl || !productionDomain || !siteId) throw new Error('baseUrl, productionDomain, and siteId are required');
     if (environment !== 'staging') throw new Error('StagingWordPressAdapter only permits the staging environment');
+    if (!isSafeHttpsUrl(baseUrl)) throw new Error('StagingWordPressAdapter requires a safe HTTPS baseUrl');
     this.baseUrl = new URL(baseUrl);
+    if (this.baseUrl.hostname.toLowerCase() === String(productionDomain).toLowerCase()) {
+      throw new Error('StagingWordPressAdapter baseUrl must not use the production domain');
+    }
     this.siteId = siteId;
     this.fetchImpl = fetchImpl;
     this.idempotencyStore = idempotencyStore;
