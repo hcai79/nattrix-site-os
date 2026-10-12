@@ -49,6 +49,10 @@ No link repair is needed. Do not add links merely to increase their count; each 
 4. Check the seven linked tool reviews against the ledger and resolve differences in a staging brief.
 5. Remove or reframe any unsupported testing language before human review.
 
+## Evidence collection update
+
+An initial, non-authorizing [C02 source ledger](../evidence/2026-10-12-c02-video-generators-initial-ledger.md) now records first-party Runway and Pika sources. It deliberately leaves the other five tools unresolved and flags conflicting Pika free-tier figures. It is not a staging brief and does not approve a page change.
+
 ## Publishing guardrail
 
 This is a Core 40 commercial page. Any publication or major modification requires human approval. Keep its URL, canonical behavior, taxonomy, affiliate treatment, internal-link destinations, and visual design unchanged unless a separate approval explicitly covers a change.
