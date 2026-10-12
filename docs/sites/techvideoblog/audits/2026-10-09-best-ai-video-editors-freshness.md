@@ -63,6 +63,8 @@ The following vendor-owned starting sources were recorded in the Operations Hub 
 
 The Filmora source remains marked `Need evidence` because a reviewer still needs to retain the currently displayed plan terms and regional billing context.
 
+An initial, non-authorizing [C01 source ledger](../evidence/2026-10-12-c01-video-editors-initial-ledger.md) now records first-party CapCut, VEED, Descript, and Pictory sources. It preserves plan, billing, region, and policy qualifications, and leaves Filmora unresolved.
+
 ## Publishing guardrail
 
 This is a Core 40 commercial page. Any publication or major modification requires human approval. Keep its URL, canonical behavior, taxonomy, affiliate treatment, internal-link destinations, and visual design unchanged unless a separate approval explicitly covers a change.
