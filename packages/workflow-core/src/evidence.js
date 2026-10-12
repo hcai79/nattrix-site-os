@@ -1,21 +1,7 @@
+import { isSafeHttpsUrl } from './urls.js';
+
 const validClaimClasses = new Set(['verified_fact', 'derived_fact', 'editorial_assessment', 'manufacturer_claim', 'community_sentiment']);
 const validImpactBands = new Set(['low', 'medium', 'high']);
-
-function isHttpUrl(value) {
-  try {
-    const url = new URL(value);
-    const hostname = url.hostname.toLowerCase();
-    return url.protocol === 'https:'
-      && !url.username
-      && !url.password
-      && hostname !== 'localhost'
-      && !hostname.endsWith('.localhost')
-      && !hostname.endsWith('.local')
-      && !/^\d{1,3}(?:\.\d{1,3}){3}$/.test(hostname);
-  } catch {
-    return false;
-  }
-}
 
 export function validateEvidencePack({ claims = [], checkedAt = new Date().toISOString() } = {}) {
   const errors = [];
@@ -27,12 +13,12 @@ export function validateEvidencePack({ claims = [], checkedAt = new Date().toISO
     if (!validClaimClasses.has(claim.class)) errors.push({ claim: item, code: 'invalid_claim_class' });
     if (!validImpactBands.has(claim.impact)) errors.push({ claim: item, code: 'invalid_impact_band' });
     if (!Number.isInteger(claim.confidence) || claim.confidence < 0 || claim.confidence > 100) errors.push({ claim: item, code: 'invalid_confidence' });
-    if (!claim.source_url || !isHttpUrl(claim.source_url)) errors.push({ claim: item, code: 'citation_missing_or_invalid' });
+    if (!claim.source_url || !isSafeHttpsUrl(claim.source_url)) errors.push({ claim: item, code: 'citation_missing_or_invalid' });
     if (!claim.source_type) errors.push({ claim: item, code: 'source_type_missing' });
     if (!claim.checked_at || Number.isNaN(Date.parse(claim.checked_at))) errors.push({ claim: item, code: 'checked_date_missing_or_invalid' });
     if (!String(claim.notes ?? '').trim()) errors.push({ claim: item, code: 'notes_missing' });
 
-    if (claim.impact === 'high' && (!claim.source_url || !isHttpUrl(claim.source_url))) reviewTriggers.push({ claim: item, reason: 'high_impact_claim_missing_citation', blocking: true });
+    if (claim.impact === 'high' && (!claim.source_url || !isSafeHttpsUrl(claim.source_url))) reviewTriggers.push({ claim: item, reason: 'high_impact_claim_missing_citation', blocking: true });
     if ((claim.confidence ?? 0) < 80) reviewTriggers.push({ claim: item, reason: 'confidence_below_80', blocking: false });
     if (['editorial_assessment', 'manufacturer_claim', 'community_sentiment'].includes(claim.class)) reviewTriggers.push({ claim: item, reason: `claim_class_${claim.class}`, blocking: false });
   });

@@ -1,6 +1,7 @@
 export { validateSiteBlueprint } from './blueprint.js';
 export { validateOnboardingChecklist } from './onboarding.js';
 export { normalizeUrl, buildUrlInventory } from './inventory.js';
+export { isSafeHttpsUrl } from './urls.js';
 export { loadRoutingPolicy, selectMockRoute, BudgetLedger, MockOpenRouterProvider, OpenRouterProvider, summarizeUsage } from './routing.js';
 export { states, transition, retryFrom } from './state-machine.js';
 export { validatePlanRows } from './workbook.js';

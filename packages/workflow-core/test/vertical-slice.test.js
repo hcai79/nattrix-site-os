@@ -172,8 +172,8 @@ test('research artifacts require attributable sources and surface unresolved ass
   assert.ok(invalid.errors.some((error) => error.code === 'sources_missing'));
 });
 
-test('research artifacts reject insecure, credentialed, and local source URLs', () => {
-  for (const url of ['http://example.com/research', 'https://user:pass@example.com/research', 'https://localhost/research', 'https://127.0.0.1/research']) {
+test('research artifacts reject insecure, credentialed, local, and IP source URLs', () => {
+  for (const url of ['http://example.com/research', 'https://user:pass@example.com/research', 'https://localhost/research', 'https://127.0.0.1/research', 'https://[::1]/research']) {
     const result = validateResearchArtifact({
       artifact_id: 'research-safe-url', site_id: 'circuits-at-home', content_id: 'circuits-1', query: 'safe research', gathered_at: '2026-10-12T00:00:00Z',
       sources: [{ source_id: 'source-1', title: 'Unsafe source', url, source_type: 'official_documentation', retrieved_at: '2026-10-12T00:00:00Z' }]

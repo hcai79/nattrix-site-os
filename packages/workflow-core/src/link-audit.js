@@ -1,21 +1,7 @@
+import { isSafeHttpsUrl } from './urls.js';
+
 function normalizeDomain(value) {
   return String(value ?? '').trim().toLowerCase().replace(/^https?:\/\//, '').replace(/\/$/, '');
-}
-
-function isHttpUrl(value) {
-  try {
-    const url = new URL(value);
-    const hostname = url.hostname.toLowerCase();
-    return url.protocol === 'https:'
-      && !url.username
-      && !url.password
-      && hostname !== 'localhost'
-      && !hostname.endsWith('.localhost')
-      && !hostname.endsWith('.local')
-      && !/^\d{1,3}(?:\.\d{1,3}){3}$/.test(hostname);
-  } catch {
-    return false;
-  }
 }
 
 export function evaluateInternalLinkAudit({ siteDomain, results = [] } = {}) {
@@ -30,7 +16,7 @@ export function evaluateInternalLinkAudit({ siteDomain, results = [] } = {}) {
     const status = Number(result.status_code);
     const record = { target_url: target, status_code: Number.isInteger(status) ? status : null };
 
-    if (!isHttpUrl(target)) {
+    if (!isSafeHttpsUrl(target)) {
       issues.push({ link: item, target_url: target, reason: 'invalid_target_url', blocking: true });
       return record;
     }

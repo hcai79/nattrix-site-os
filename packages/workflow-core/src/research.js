@@ -1,21 +1,7 @@
+import { isSafeHttpsUrl } from './urls.js';
+
 const sourceTypes = new Set(['first_party', 'official_documentation', 'independent_editorial', 'regulatory', 'community']);
 const assumptionStatuses = new Set(['open', 'validated', 'rejected']);
-
-function isHttpUrl(value) {
-  try {
-    const url = new URL(value);
-    const hostname = url.hostname.toLowerCase();
-    return url.protocol === 'https:'
-      && !url.username
-      && !url.password
-      && hostname !== 'localhost'
-      && !hostname.endsWith('.localhost')
-      && !hostname.endsWith('.local')
-      && !/^\d{1,3}(?:\.\d{1,3}){3}$/.test(hostname);
-  } catch {
-    return false;
-  }
-}
 
 export function validateResearchArtifact({ artifact_id, site_id, content_id, query, gathered_at, sources = [], assumptions = [] } = {}) {
   const errors = [];
@@ -29,7 +15,7 @@ export function validateResearchArtifact({ artifact_id, site_id, content_id, que
   (Array.isArray(sources) ? sources : []).forEach((source, index) => {
     const item = index + 1;
     if (!source?.source_id || !String(source?.title ?? '').trim()) errors.push({ source: item, code: 'source_identity_missing' });
-    if (!isHttpUrl(source?.url)) errors.push({ source: item, code: 'source_url_missing_or_invalid' });
+    if (!isSafeHttpsUrl(source?.url)) errors.push({ source: item, code: 'source_url_missing_or_invalid' });
     if (!sourceTypes.has(source?.source_type)) errors.push({ source: item, code: 'source_type_invalid' });
     if (!source?.retrieved_at || Number.isNaN(Date.parse(source.retrieved_at))) errors.push({ source: item, code: 'source_retrieval_date_missing_or_invalid' });
     if (seenUrls.has(source?.url)) errors.push({ source: item, code: 'duplicate_source_url' });
