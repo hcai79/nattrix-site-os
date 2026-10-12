@@ -47,6 +47,10 @@ Eight of the nine internal destinations returned HTTP 200 on 2026-10-09:
 4. Resolve the Captions route before proposing a staging change to this page.
 5. Prepare a block-preserving staging brief only after the evidence pack and a human approval are complete.
 
+## Evidence collection update
+
+An initial, non-authorizing [C06 source ledger](../evidence/2026-10-12-c06-subtitle-generators-initial-ledger.md) records first-party pricing and product-scope sources. It preserves the Captions routing decision and leaves subtitle, translation, and language claims unresolved until individual claim evidence is collected.
+
 ## Publishing guardrail
 
 This is a Core 40 commercial page. Any publication or major modification requires human approval. Keep its URL, canonical behavior, taxonomy, affiliate treatment, internal-link destinations, and visual design unchanged unless a separate approval explicitly covers a change.
