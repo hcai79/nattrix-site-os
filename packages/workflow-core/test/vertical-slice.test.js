@@ -308,6 +308,18 @@ test('evidence packs require contextual notes for every factual claim', () => {
   assert.ok(result.errors.some((error) => error.code === 'notes_missing'));
 });
 
+test('evidence packs reject insecure, credentialed, and local source URLs', () => {
+  for (const source_url of ['http://example.com/pricing', 'https://user:pass@example.com/pricing', 'https://localhost/pricing', 'https://127.0.0.1/pricing']) {
+    const result = validateEvidencePack({
+      claims: [{
+        text: 'A sourced claim.', class: 'verified_fact', impact: 'medium', confidence: 90,
+        source_url, source_type: 'first_party', checked_at: '2026-10-12T00:00:00Z', notes: 'Safe source validation test.'
+      }]
+    });
+    assert.ok(result.errors.some((error) => error.code === 'citation_missing_or_invalid'), source_url);
+  }
+});
+
 test('internal link audits distinguish healthy destinations, redirects, and blockers', () => {
   const audit = evaluateInternalLinkAudit({
     siteDomain: 'techvideoblog.com',
