@@ -33,7 +33,7 @@ The following Core 40 pages have also received read-only first-pass audits. They
 | --- | --- | --- | --- |
 | Best AI Video Translators | 689 | [Audit](2026-10-10-best-ai-video-translators-freshness.md), [partial ledger](../evidence/2026-10-12-video-translators-initial-ledger.md) | Distinguish subtitles, translated audio, dubbing, lip sync, voice options, language coverage, and related policy terms. |
 | Best AI Voice Cloning Tools | 690 | [Audit](2026-10-10-best-ai-voice-cloning-tools-freshness.md), [partial ledger](../evidence/2026-10-12-voice-cloning-tools-initial-ledger.md) | Verify consent, voice likeness, impersonation safeguards, commercial use, retention, and training terms as separate claims. |
-| Best AI Thumbnail Generators | 806 | [2026-10-10 audit](2026-10-10-best-ai-thumbnail-generators-freshness.md) | Verify generation scope, asset licenses, commercial use, templates, brand controls, plan limits, and policy claims. |
+| Best AI Thumbnail Generators | 806 | [Audit](2026-10-10-best-ai-thumbnail-generators-freshness.md), [partial ledger](../evidence/2026-10-12-thumbnail-generators-initial-ledger.md) | Verify generation scope, asset licenses, commercial use, templates, brand controls, plan limits, and policy claims. |
 
 ## Repeatable review method
 
