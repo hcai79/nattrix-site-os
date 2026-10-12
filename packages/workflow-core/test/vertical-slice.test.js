@@ -77,6 +77,7 @@ test('Gutenberg renderer creates escaped blocks and only permits cited HTTP(S) s
 test('staging adapter rejects production and only creates explicit staging drafts', async () => {
   assert.throws(() => new StagingWordPressAdapter({ baseUrl: 'https://example.com', productionDomain: 'example.com', siteId: 'site-a', environment: 'production' }), /staging environment/);
   assert.throws(() => new StagingWordPressAdapter({ baseUrl: 'https://example.com', productionDomain: 'example.com', siteId: 'site-a', environment: 'staging' }), /must not use the production domain/);
+  assert.throws(() => new StagingWordPressAdapter({ baseUrl: 'https://staging.example.com', productionDomain: 'https://example.com', siteId: 'site-a', environment: 'staging' }), /productionDomain must be a hostname/);
   const requests = [];
   const adapter = new StagingWordPressAdapter({
     baseUrl: 'https://staging.example.com', productionDomain: 'example.com',

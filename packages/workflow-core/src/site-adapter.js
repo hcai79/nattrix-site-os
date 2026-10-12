@@ -32,8 +32,12 @@ export class StagingWordPressAdapter {
     if (!baseUrl || !productionDomain || !siteId) throw new Error('baseUrl, productionDomain, and siteId are required');
     if (environment !== 'staging') throw new Error('StagingWordPressAdapter only permits the staging environment');
     if (!isSafeHttpsUrl(baseUrl)) throw new Error('StagingWordPressAdapter requires a safe HTTPS baseUrl');
+    const normalizedProductionDomain = String(productionDomain).trim().toLowerCase();
+    if (!/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(normalizedProductionDomain)) {
+      throw new Error('StagingWordPressAdapter productionDomain must be a hostname without a protocol or path');
+    }
     this.baseUrl = new URL(baseUrl);
-    if (this.baseUrl.hostname.toLowerCase() === String(productionDomain).toLowerCase()) {
+    if (this.baseUrl.hostname.toLowerCase() === normalizedProductionDomain) {
       throw new Error('StagingWordPressAdapter baseUrl must not use the production domain');
     }
     this.siteId = siteId;
