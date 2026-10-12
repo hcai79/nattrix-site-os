@@ -48,6 +48,10 @@ No link repair is needed. Do not add links merely to increase their count; each 
 4. Reconcile the supporting review pages with the resulting source pack.
 5. Prepare a block-preserving staging brief and route it through human approval before any page change.
 
+## Evidence collection update
+
+An initial, non-authorizing [C03 source ledger](../evidence/2026-10-12-c03-avatar-tools-initial-ledger.md) records first-party pricing, consent, and policy sources. It treats consent, likeness, biometric, and training statements as policy-sensitive and leaves current D-ID pricing unresolved.
+
 ## Publishing guardrail
 
 This is a Core 40 commercial page containing policy-sensitive avatar guidance. Any publication or major modification requires human approval. Keep its URL, canonical behavior, taxonomy, affiliate treatment, internal-link destinations, and visual design unchanged unless a separate approval explicitly covers a change.
