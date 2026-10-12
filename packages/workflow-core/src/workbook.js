@@ -24,7 +24,7 @@ function normalizedUrl(value) {
   }
 }
 
-export function validatePlanRows(rows, { siteId, existingInventory = [], knownCoreIds = [] } = {}) {
+export function validatePlanRows(rows, { siteId, siteDomain, existingInventory = [], knownCoreIds = [] } = {}) {
   const errors = [];
   const changes = [];
   const seenIds = new Set();
@@ -47,6 +47,12 @@ export function validatePlanRows(rows, { siteId, existingInventory = [], knownCo
 
     const proposedUrl = normalizedUrl(row.proposed_url);
     if (!proposedUrl) errors.push({ row: rowNumber, field: 'proposed_url', code: 'invalid_url', message: 'proposed_url must be an absolute URL.' });
+    if (proposedUrl && siteDomain) {
+      const url = new URL(proposedUrl);
+      if (url.protocol !== 'https:' || url.hostname.toLowerCase() !== String(siteDomain).toLowerCase()) {
+        errors.push({ row: rowNumber, field: 'proposed_url', code: 'proposed_url_outside_site_domain', message: 'proposed_url must be HTTPS and belong to the configured site domain.' });
+      }
+    }
     if (proposedUrl && existingUrls.has(proposedUrl) && row.action === 'NEW') errors.push({ row: rowNumber, field: 'proposed_url', code: 'existing_url_collision', message: 'NEW content collides with an existing canonical URL.' });
     if (!validActions.has(row.action)) errors.push({ row: rowNumber, field: 'action', code: 'invalid_action', message: 'Action must be NEW, REFRESH, MERGE, SKIP, or REVIEW.' });
     if (!validEvidenceStatuses.has(row.evidence_status)) errors.push({ row: rowNumber, field: 'evidence_status', code: 'invalid_evidence_status', message: 'Evidence status is invalid.' });

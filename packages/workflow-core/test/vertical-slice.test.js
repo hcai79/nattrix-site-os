@@ -292,6 +292,17 @@ test('workbook import preview rejects malformed rows and existing URL collisions
   assert.deepEqual(result.changes.map((change) => change.outcome), ['preview_only', 'blocked']);
 });
 
+test('workbook import preview rejects proposed URLs outside the configured site domain', () => {
+  const result = validatePlanRows([{
+    stable_content_id: 'circuits-support-external', site_id: 'circuits-at-home', cluster_id: 'multimeters',
+    title: 'External destination', primary_query: 'external destination', intent: 'informational', type: 'supporting_article',
+    slug: 'external-destination', proposed_url: 'https://example.com/external-destination', action: 'NEW',
+    target_core_id: 'core-multimeters', priority: 'high', evidence_status: 'verified', review_tier: 'standard', status: 'planned'
+  }], { siteId: 'circuits-at-home', siteDomain: 'circuitsathome.com', knownCoreIds: ['core-multimeters'] });
+  assert.equal(result.valid, false);
+  assert.deepEqual(result.errors.map((error) => error.code), ['proposed_url_outside_site_domain']);
+});
+
 test('high-impact claims without citations are blocked and safety-sensitive work receives expert review', () => {
   const evidence = validateEvidencePack({
     checkedAt: '2026-10-08',
