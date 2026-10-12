@@ -338,6 +338,21 @@ test('internal link audits distinguish healthy destinations, redirects, and bloc
   assert.throws(() => evaluateInternalLinkAudit({ results: [] }), /siteDomain/);
 });
 
+test('internal link audits reject insecure, credentialed, and local destinations', () => {
+  const audit = evaluateInternalLinkAudit({
+    siteDomain: 'techvideoblog.com',
+    results: [
+      { target_url: 'http://techvideoblog.com/tools/review/', status_code: 200 },
+      { target_url: 'https://user:pass@techvideoblog.com/tools/review/', status_code: 200 },
+      { target_url: 'https://localhost/tools/review/', status_code: 200 }
+    ]
+  });
+  assert.equal(audit.valid, false);
+  assert.deepEqual(audit.issues.map((issue) => issue.reason), [
+    'invalid_target_url', 'invalid_target_url', 'invalid_target_url'
+  ]);
+});
+
 test('CSV export and import preserve values while rejecting malformed workbook input', () => {
   const csv = exportCsv([{ stable_content_id: 'circuits-1', title: 'Guide, with comma', notes: 'A "quoted" note' }], ['stable_content_id', 'title', 'notes']);
   assert.deepEqual(parseCsv(csv), [{ stable_content_id: 'circuits-1', title: 'Guide, with comma', notes: 'A "quoted" note' }]);

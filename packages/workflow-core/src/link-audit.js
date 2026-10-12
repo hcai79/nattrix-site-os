@@ -5,7 +5,14 @@ function normalizeDomain(value) {
 function isHttpUrl(value) {
   try {
     const url = new URL(value);
-    return url.protocol === 'https:' || url.protocol === 'http:';
+    const hostname = url.hostname.toLowerCase();
+    return url.protocol === 'https:'
+      && !url.username
+      && !url.password
+      && hostname !== 'localhost'
+      && !hostname.endsWith('.localhost')
+      && !hostname.endsWith('.local')
+      && !/^\d{1,3}(?:\.\d{1,3}){3}$/.test(hostname);
   } catch {
     return false;
   }
