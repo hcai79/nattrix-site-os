@@ -1,0 +1,11 @@
+{
+  "site_id": "circuits-at-home",
+  "production_domain": "circuitsathome.com",
+  "staging_base_url": null,
+  "inventory_complete": false,
+  "backup_restore_verified": false,
+  "integration_account_role": null,
+  "reviewer": "owner",
+  "production_writes_authorized": false,
+  "source": "Repository onboarding seed on 2026-10-12. No credential values are stored and this record authorizes no production access."
+}

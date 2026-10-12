@@ -51,6 +51,17 @@ test('onboarding checklist exposes missing staging prerequisites without authori
   }).valid, false);
 });
 
+test('CircuitsAtHome onboarding seed is staging-blocked and production-write-disabled', async () => {
+  const checklist = await readJson('sites/circuitsathome/onboarding-checklist.json');
+  const result = validateOnboardingChecklist(checklist);
+  assert.equal(result.valid, true);
+  assert.equal(result.stagingReady, false);
+  assert.deepEqual(result.stagingBlockers, [
+    'staging_url_missing', 'backup_restore_not_verified', 'least_privilege_role_missing'
+  ]);
+  assert.equal(result.productionWritesAuthorized, false);
+});
+
 test('mock site adapter uses fixtures for read-only inventory and rejects writes', async () => {
   const blueprint = await readJson('sites/circuitsathome/site-blueprint.json');
   const urlRecords = await readJson('packages/workflow-core/fixtures/circuits-url-inventory.json');

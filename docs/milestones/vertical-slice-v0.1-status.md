@@ -19,7 +19,7 @@ Branch: `codex/vertical-slice-contracts`
 
 ## Verified acceptance evidence
 
-The offline suite currently has 35 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, deterministic model-evaluation scoring, malformed workbook rows, URL collisions and off-domain proposed URLs, deterministic internal-link result classification and unsafe destination rejection, source-attributed research and unsafe research-source rejection, evidence notes, unsafe-source rejection and uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, structured human approvals, Gutenberg rendering, site-blueprint and onboarding readiness checks, staging-only draft and scheduling restrictions that reject production hostnames, and Portfolio Engine capability and input contracts.
+The offline suite currently has 36 passing checks. It covers no-live-provider defaults, spending caps and usage reporting, deterministic model-evaluation scoring, malformed workbook rows, URL collisions and off-domain proposed URLs, deterministic internal-link result classification and unsafe destination rejection, source-attributed research and unsafe research-source rejection, evidence notes, unsafe-source rejection and uncited high-impact claims, restricted media types, duplicate scheduling prevention, mandatory draft QA, structured human approvals, Gutenberg rendering, site-blueprint and onboarding readiness checks for TechVideoBlog and CircuitsAtHome, staging-only draft and scheduling restrictions that reject production hostnames, and Portfolio Engine capability and input contracts.
 
 ## Still blocked by environment or owner decisions
 
